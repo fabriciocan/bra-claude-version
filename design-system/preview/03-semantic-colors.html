@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: #fff; padding: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .chip { border-radius: 4px; overflow: hidden; }
+  .chip-top { height: 48px; }
+  .chip-bot { padding: 8px 10px; background: #F5F5F5; }
+  .chip-name { font-size: 12px; font-weight: 600; color: #111; }
+  .chip-hex { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #7A7A7A; margin-top: 2px; }
+  .chip-badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="chip">
+    <div class="chip-top" style="background:#1A8A4A"></div>
+    <div class="chip-bot">
+      <div class="chip-name">Sucesso</div>
+      <div class="chip-hex">#1A8A4A</div>
+      <div class="chip-badge" style="background:#E6F5EE;color:#1A8A4A">IP65 Aprovado</div>
+    </div>
+  </div>
+  <div class="chip">
+    <div class="chip-top" style="background:#D97706"></div>
+    <div class="chip-bot">
+      <div class="chip-name">Atenção</div>
+      <div class="chip-hex">#D97706</div>
+      <div class="chip-badge" style="background:#FEF3C7;color:#D97706">Em revisão</div>
+    </div>
+  </div>
+  <div class="chip">
+    <div class="chip-top" style="background:#DC2626"></div>
+    <div class="chip-bot">
+      <div class="chip-name">Erro / Alerta</div>
+      <div class="chip-hex">#DC2626</div>
+      <div class="chip-badge" style="background:#FEE2E2;color:#DC2626">Fora de estoque</div>
+    </div>
+  </div>
+  <div class="chip">
+    <div class="chip-top" style="background:#0369A1"></div>
+    <div class="chip-bot">
+      <div class="chip-name">Informação</div>
+      <div class="chip-hex">#0369A1</div>
+      <div class="chip-badge" style="background:#E0F2FE;color:#0369A1">Novo produto</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

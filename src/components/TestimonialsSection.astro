@@ -1,0 +1,33 @@
+---
+import type { Testimonial } from '../lib/queries';
+
+interface Props {
+  testimonials: Testimonial[];
+}
+const { testimonials } = Astro.props;
+---
+
+<section style="padding: 80px 0; background: #fff;">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;">
+      <p class="eyebrow" style="margin-bottom:8px">Clientes</p>
+      <h2 class="section-title">O QUE DIZEM NOSSOS CLIENTES</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      {testimonials.map(t => (
+        <div class="testimonial-card">
+          <div class="testimonial-card__quote-icon">"</div>
+          <p class="testimonial-card__quote">{t.quote}</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">{t.name.charAt(0)}</div>
+            <div>
+              <div class="testimonial-card__name">{t.name}</div>
+              <div class="testimonial-card__role">{t.role} — {t.company}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

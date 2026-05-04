@@ -1,0 +1,318 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getProducts, getSiteSettings } from '../../lib/queries';
+import type { Product } from '../../lib/queries';
+
+const [products, settings] = await Promise.all([getProducts(), getSiteSettings()]);
+const catParam   = Astro.url.searchParams.get('cat') || '';
+const categories = ['Todos', 'Highbay', 'Projetor UFO', 'Projetor', 'Emergência'];
+
+// Minimal data for Alpine (count + compare logic only)
+const miniProducts = products.map(p => ({
+  slug: p.slug,
+  name: p.name.toLowerCase(),
+  shortDesc: p.shortDesc.toLowerCase(),
+  category: p.category,
+  badge: (p.badge || '').toLowerCase(),
+}));
+---
+
+<BaseLayout
+  title="Catálogo de Produtos LED Industrial"
+  description="Catálogo BRALARMSEG: Highbay, Projetores UFO, Projetores e Emergência. Pesquise, filtre e compare."
+>
+  <Header currentPage="produtos" />
+
+  <!-- Alpine root: entire main element -->
+  <main x-data="catalog" x-init="init()">
+
+    <!-- ─── Page header ─── -->
+    <div class="page-header">
+      <div class="container">
+        <nav class="breadcrumb">
+          <a href="/" class="breadcrumb__item">BRALARMSEG</a>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__item breadcrumb__item--current">Catálogo</span>
+        </nav>
+        <h1 class="page-header__title" style="margin-top:10px">CATÁLOGO DE PRODUTOS LED</h1>
+        <p class="page-header__sub">Soluções completas em iluminação industrial — Highbay, Projetores e Emergência.</p>
+      </div>
+    </div>
+
+    <!-- ─── Toolbar ─── -->
+    <div class="catalog-toolbar">
+      <div class="catalog-toolbar__inner">
+        <div class="search-wrap">
+          <svg class="search-wrap__icon" width="14" height="14" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" class="search-input" placeholder="Buscar produto..."
+            x-model="search" @input.debounce.200ms="filterNow()" aria-label="Buscar produto" />
+        </div>
+
+        <div class="cat-tabs" role="tablist">
+          {categories.map(cat => (
+            <button
+              class="cat-tab"
+              :class={`category==='${cat}'?'cat-tab--active':''`}
+              @click={`category='${cat}';filterNow()`}
+              role="tab"
+            >{cat}</button>
+          ))}
+        </div>
+
+        <div class="toolbar-right">
+          <select class="sort-select" x-model="sort" @change="filterNow()" aria-label="Ordenar">
+            <option value="default">Ordenar por...</option>
+            <option value="name">Nome A–Z</option>
+            <option value="category">Categoria</option>
+          </select>
+          <div class="view-toggle">
+            <button class="view-btn" :class="view==='grid'?'view-btn--active':''" @click="view='grid'" title="Grade">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+              </svg>
+            </button>
+            <button class="view-btn" :class="view==='list'?'view-btn--active':''" @click="view='list'" title="Lista">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/>
+                <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/>
+                <line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Content ─── -->
+    <div class="container" style="padding-top:20px;padding-bottom:80px">
+
+      <!-- Results bar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+        <span style="font-size:12px;color:#7A7A7A;font-weight:500"
+          x-text="`${visCount} produto${visCount!==1?'s':''} encontrado${visCount!==1?'s':''}`"></span>
+        <span style="font-size:12px;color:#E35106;font-weight:600"
+          x-show="compare.length>0"
+          x-text="`${compare.length} selecionado${compare.length>1?'s':''} para comparar`"></span>
+      </div>
+
+      <!-- Empty state -->
+      <div x-show="visCount===0" style="text-align:center;padding:64px 0">
+        <div style="font-size:48px;opacity:.2;margin-bottom:12px">○</div>
+        <p style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:#111;margin-bottom:8px">
+          Nenhum produto encontrado
+        </p>
+        <p style="color:#7A7A7A;font-size:14px">Tente outra categoria ou limpe a busca.</p>
+        <button class="btn btn-ghost" style="margin-top:20px"
+          @click="search='';category='Todos';filterNow()">Limpar filtros</button>
+      </div>
+
+      <!-- ══ GRID VIEW ══ -->
+      <div x-show="view==='grid'" class="products-grid">
+        {products.map((p: Product) => (
+          <article
+            class="product-card"
+            data-cat={p.category}
+            data-search={`${p.name} ${p.shortDesc} ${p.badge||''}`.toLowerCase()}
+            x-show="vis($el)"
+          >
+            <!-- Compare checkbox -->
+            <div
+              class="product-card__compare"
+              :class={`cmp('${p.slug}')?'product-card__compare--checked':''`}
+              @click.prevent.stop={`tog('${p.slug}')`}
+              :title={`cmp('${p.slug}')?'Remover da comparação':'Adicionar à comparação'`}
+              role="checkbox"
+              :aria-checked={`cmp('${p.slug}')`}
+              tabindex="0"
+            >
+              <svg x-show={`cmp('${p.slug}')`} width="10" height="10" viewBox="0 0 24 24"
+                fill="none" stroke="#fff" stroke-width="3" style="display:none">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <svg x-show={`!cmp('${p.slug}')`} width="10" height="10" viewBox="0 0 24 24"
+                fill="none" stroke="#BABABA" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            </div>
+
+            <!-- Badge -->
+            {p.badge && (
+              <div class="product-card__badge">
+                <span class="badge" style={`background:${p.badgeColor||'#E35106'}`}>{p.badge}</span>
+              </div>
+            )}
+
+            <!-- Image -->
+            <a href={`/produtos/${p.slug}`} class="product-card__img-wrap">
+              <img
+                src={p.imageUrl || `https://placehold.co/300x200/F5F5F5/8A8A8A?text=${encodeURIComponent(p.name)}`}
+                alt={p.fullName}
+                class="product-card__img"
+                loading="lazy" width="300" height="200"
+              />
+            </a>
+
+            <!-- Body -->
+            <div class="product-card__body">
+              <div class="product-card__cat">{p.category}</div>
+              <a href={`/produtos/${p.slug}`} class="product-card__name">{p.name}</a>
+              {p.specs.length > 0 && (
+                <div class="product-card__chips">
+                  {p.specs.slice(0,3).map(s => (
+                    <span class="chip" title={s.key}>{s.value}</span>
+                  ))}
+                </div>
+              )}
+              <p class="product-card__desc">{p.shortDesc}</p>
+              <div class="product-card__actions">
+                <a href={`/produtos/${p.slug}`} class="product-card__detail">Ver ficha técnica →</a>
+                <a href={`/contato?produto=${p.slug}`} class="product-card__cta">Orçamento</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- ══ LIST VIEW ══ -->
+      <div x-show="view==='list'" style="display:flex;flex-direction:column;gap:8px">
+        {products.map((p: Product) => (
+          <div
+            class="list-row"
+            data-cat={p.category}
+            data-search={`${p.name} ${p.shortDesc} ${p.badge||''}`.toLowerCase()}
+            x-show="vis($el)"
+          >
+            <input type="checkbox"
+              :checked={`cmp('${p.slug}')`}
+              @change={`tog('${p.slug}')`}
+              style="width:16px;height:16px;accent-color:#003DA5;flex-shrink:0;cursor:pointer"
+            />
+            <a href={`/produtos/${p.slug}`} class="list-row__img-wrap">
+              <img src={p.imageUrl||`https://placehold.co/80x60/F5F5F5/8A8A8A?text=${encodeURIComponent(p.name)}`}
+                alt={p.fullName} class="list-row__img" loading="lazy" />
+            </a>
+            <div class="list-row__info">
+              <div class="list-row__cat">{p.category}</div>
+              <a href={`/produtos/${p.slug}`} class="list-row__name">{p.name}</a>
+              <p class="list-row__desc">{p.shortDesc}</p>
+            </div>
+            <div class="list-row__specs">
+              {p.specs.slice(0,4).map(s => (
+                <div class="list-row__spec-row">
+                  <span class="list-row__spec-key">{s.key}:</span>
+                  <span class="list-row__spec-val">{s.value}</span>
+                </div>
+              ))}
+            </div>
+            <div class="list-row__actions">
+              {p.badge && (
+                <span class="badge" style={`background:${p.badgeColor||'#E35106'}`}>{p.badge}</span>
+              )}
+              <a href={`/produtos/${p.slug}`} class="btn btn-ghost btn-sm">Ficha técnica</a>
+              <a href={`/contato?produto=${p.slug}`} class="btn btn-primary btn-sm">Orçamento</a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div><!-- /container -->
+
+    <!-- ─── Compare bar ─── -->
+    <div class="compare-bar" x-show="compare.length>0" x-transition style="display:none">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="#A0B4CC" stroke-width="2" style="flex-shrink:0" aria-hidden="true">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      <span class="compare-bar__label"
+        x-text="`${compare.length} de 4 produtos selecionados`"></span>
+      <span style="font-size:12px;color:#5A7AA0" x-show="compare.length<2">— selecione ao menos 2</span>
+      <a :href="`/comparar?ids=${compare.join(',')}`"
+        class="btn btn-primary btn-sm" x-show="compare.length>=2">COMPARAR</a>
+      <button class="compare-bar__clear" @click="compare=[];saveCmp()">Limpar</button>
+    </div>
+
+  </main>
+
+  <Footer settings={settings} />
+</BaseLayout>
+
+<!--
+  IMPORTANTE: ambos os scripts são `is:inline`.
+  Scripts inline rodam SINCRONAMENTE durante o parse HTML,
+  garantindo que o alpine:init listener seja registrado
+  ANTES de o Alpine CDN (defer, no final do body) ser executado.
+-->
+<script define:vars={{ miniProducts, catParam }} is:inline>
+  window.__BRA_MINI__ = miniProducts;
+  window.__BRA_CAT__  = catParam || '';
+</script>
+
+<script is:inline>
+  document.addEventListener('alpine:init', function () {
+    Alpine.data('catalog', function () {
+      return {
+        mini:     window.__BRA_MINI__ || [],
+        search:   '',
+        category: 'Todos',
+        sort:     'default',
+        view:     'grid',
+        compare:  [],
+
+        init: function () {
+          var c = window.__BRA_CAT__;
+          if (c && c !== '') this.category = c;
+          try {
+            var s = sessionStorage.getItem('bra-compare');
+            if (s) this.compare = JSON.parse(s);
+          } catch (e) { /* ignore */ }
+        },
+
+        /* Count matching products (drives results bar & empty state) */
+        get visCount () {
+          var q    = this.search.trim().toLowerCase();
+          var self = this;
+          return this.mini.filter(function (p) {
+            var okCat = self.category === 'Todos' || p.category === self.category;
+            var okSrc = !q || p.name.includes(q) || p.shortDesc.includes(q) || p.badge.includes(q);
+            return okCat && okSrc;
+          }).length;
+        },
+
+        /* Visibility check for server-rendered cards (reads data-* attrs) */
+        vis: function (el) {
+          var cat    = (el.dataset.cat    || '').trim();
+          var search = (el.dataset.search || '').trim();
+          var okCat  = this.category === 'Todos' || cat === this.category;
+          var q      = this.search.trim().toLowerCase();
+          var okSrc  = !q || search.includes(q);
+          return okCat && okSrc;
+        },
+
+        filterNow: function () { /* reactive state change is enough */ },
+
+        cmp: function (slug) { return this.compare.indexOf(slug) !== -1; },
+
+        tog: function (slug) {
+          if (this.cmp(slug)) {
+            this.compare = this.compare.filter(function (id) { return id !== slug; });
+          } else if (this.compare.length < 4) {
+            this.compare = this.compare.concat([slug]);
+          }
+          this.saveCmp();
+        },
+
+        saveCmp: function () {
+          try { sessionStorage.setItem('bra-compare', JSON.stringify(this.compare)); }
+          catch (e) { /* ignore */ }
+        },
+      };
+    });
+  });
+</script>

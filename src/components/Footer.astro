@@ -1,0 +1,51 @@
+---
+import type { SiteSettings } from '../lib/queries';
+
+interface Props {
+  settings: SiteSettings;
+}
+const { settings } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="site-footer__main container">
+    <!-- Brand col -->
+    <div class="site-footer__col">
+      <div class="site-footer__logo-word">
+        BR<span style="color:#E35106">A</span>LARMSEG
+      </div>
+      <div class="site-footer__logo-sub">Segurança e Emergência</div>
+      <p class="site-footer__desc">
+        Especialistas em soluções de iluminação LED para o setor industrial. Tecnologia, eficiência e durabilidade para o seu negócio.
+      </p>
+    </div>
+
+    <!-- Links col -->
+    <div class="site-footer__col">
+      <div class="site-footer__col-title">Links Rápidos</div>
+      <a href="/" class="site-footer__link">Início</a>
+      <a href="/sobre" class="site-footer__link">Sobre</a>
+      <a href="/produtos" class="site-footer__link">Produtos</a>
+      <a href="/aplicacoes" class="site-footer__link">Aplicações</a>
+      <a href="/contato" class="site-footer__link">Contato</a>
+      <a href="/produtos?cat=Emergência" class="site-footer__link">Luminárias de Emergência</a>
+    </div>
+
+    <!-- Contact col -->
+    <div class="site-footer__col">
+      <div class="site-footer__col-title">Contato</div>
+      <p class="site-footer__contact-line" set:html={settings.address.replace('\n', '<br>')} />
+      <p class="site-footer__contact-line">{settings.phone1} | {settings.phone2}</p>
+      <p class="site-footer__contact-line">{settings.phone3} | {settings.phone4}</p>
+      <p class="site-footer__contact-line">{settings.email}</p>
+      <a href="/contato" class="site-footer__cta">SOLICITAR ORÇAMENTO</a>
+    </div>
+  </div>
+
+  <div class="site-footer__bar">
+    <div class="container site-footer__bar-inner">
+      <span>© {new Date().getFullYear()} BRALARMSEG — Todos os direitos reservados. | CNPJ: {settings.cnpj}</span>
+      <a href="/privacidade" class="site-footer__link" style="margin-left:auto">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>

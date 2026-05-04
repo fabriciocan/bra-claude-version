@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: #F0F0F0; }
+  /* NAV */
+  nav { background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.10); }
+  .nav-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 64px; }
+  .logo-area { display: flex; flex-direction: column; line-height: 1; }
+  .logo-word { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; color: #111; letter-spacing: -0.01em; }
+  .logo-word span { color: #E35106; }
+  .logo-sub { font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #7A7A7A; margin-top: 1px; }
+  .nav-links { display: flex; align-items: center; gap: 0; }
+  .nav-link { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: #3A3A3A; padding: 0 16px; height: 64px; display: flex; align-items: center; text-decoration: none; border-bottom: 3px solid transparent; transition: color 150ms, border-color 150ms; }
+  .nav-link:hover { color: #E35106; border-bottom-color: #E35106; }
+  .nav-link.active { color: #E35106; border-bottom-color: #E35106; }
+  .nav-cta { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: #E35106; color: #fff; padding: 9px 18px; border-radius: 3px; text-decoration: none; transition: background 150ms; margin-left: 12px; }
+  .nav-cta:hover { background: #B83E04; }
+  /* TOP BAR */
+  .topbar { background: #0A1628; padding: 5px 24px; display: flex; justify-content: flex-end; gap: 20px; }
+  .topbar-item { font-size: 11px; color: #A0B4CC; display: flex; align-items: center; gap: 5px; }
+  .topbar-item svg { opacity: 0.6; }
+  /* PREVIEW CONTENT */
+  .page-stub { padding: 32px 24px; display: flex; align-items: center; justify-content: center; color: #BABABA; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-item">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.64A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+    (41) 99274-4818
+  </div>
+  <div class="topbar-item">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    bra@bralarmseg.com.br
+  </div>
+</div>
+<nav>
+  <div class="nav-inner">
+    <div class="logo-area">
+      <div class="logo-word">BR<span>A</span>LARMSEG</div>
+      <div class="logo-sub">Segurança e Emergência</div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-link active">Início</a>
+      <a href="#" class="nav-link">Sobre</a>
+      <a href="#" class="nav-link">Produtos</a>
+      <a href="#" class="nav-link">Aplicações</a>
+      <a href="#" class="nav-link">Blog</a>
+      <a href="#" class="nav-cta">Solicitar Orçamento</a>
+    </div>
+  </div>
+</nav>
+<div class="page-stub">↑ Sticky header — white background, 64px height, orange active indicator</div>
+</body>
+</html>

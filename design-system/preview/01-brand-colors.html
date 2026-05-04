@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: #fff; padding: 24px; }
+  .row { display: flex; gap: 0; margin-bottom: 12px; }
+  .swatch { flex: 1; height: 72px; display: flex; flex-direction: column; justify-content: flex-end; padding: 8px; }
+  .swatch-label { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; }
+  .swatch-hex { font-family: 'JetBrains Mono', monospace; font-size: 10px; opacity: 0.75; margin-top: 2px; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #7A7A7A; margin-bottom: 6px; }
+  .group { margin-bottom: 20px; }
+  .swatch.dark .swatch-label, .swatch.dark .swatch-hex { color: #fff; }
+  .swatch.light .swatch-label, .swatch.light .swatch-hex { color: #111; }
+</style>
+</head>
+<body>
+<div class="group">
+  <div class="section-title">Brand Colors</div>
+  <div class="row">
+    <div class="swatch dark" style="background:#B83E04;border-radius:4px 0 0 4px">
+      <div class="swatch-label">Orange Dark</div>
+      <div class="swatch-hex">#B83E04</div>
+    </div>
+    <div class="swatch dark" style="background:#E35106;flex:2">
+      <div class="swatch-label">Brand Orange ●</div>
+      <div class="swatch-hex">#E35106</div>
+    </div>
+    <div class="swatch light" style="background:#F47A3A">
+      <div class="swatch-label">Orange Light</div>
+      <div class="swatch-hex">#F47A3A</div>
+    </div>
+    <div class="swatch light" style="background:#FDE8DA;border-radius:0 4px 4px 0">
+      <div class="swatch-label">Orange Tint</div>
+      <div class="swatch-hex">#FDE8DA</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="swatch dark" style="background:#002878;border-radius:4px 0 0 4px">
+      <div class="swatch-label">Blue Dark</div>
+      <div class="swatch-hex">#002878</div>
+    </div>
+    <div class="swatch dark" style="background:#003DA5;flex:2">
+      <div class="swatch-label">Brand Blue ●</div>
+      <div class="swatch-hex">#003DA5</div>
+    </div>
+    <div class="swatch dark" style="background:#1A5CC8">
+      <div class="swatch-label">Blue Light</div>
+      <div class="swatch-hex">#1A5CC8</div>
+    </div>
+    <div class="swatch light" style="background:#DCE8F8;border-radius:0 4px 4px 0">
+      <div class="swatch-label">Blue Tint</div>
+      <div class="swatch-hex">#DCE8F8</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="swatch dark" style="background:#060D1A;border-radius:4px 0 0 4px">
+      <div class="swatch-label">BG Darker</div>
+      <div class="swatch-hex">#060D1A</div>
+    </div>
+    <div class="swatch dark" style="background:#0A1628;flex:2">
+      <div class="swatch-label">BG Dark</div>
+      <div class="swatch-hex">#0A1628</div>
+    </div>
+    <div class="swatch dark" style="background:#111111">
+      <div class="swatch-label">Brand Black</div>
+      <div class="swatch-hex">#111111</div>
+    </div>
+    <div class="swatch light" style="background:#FFFFFF;border:1px solid #ddd;border-radius:0 4px 4px 0">
+      <div class="swatch-label">White</div>
+      <div class="swatch-hex">#FFFFFF</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

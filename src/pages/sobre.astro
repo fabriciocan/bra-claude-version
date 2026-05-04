@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StatsSection from '../components/StatsSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import { getSiteSettings } from '../lib/queries';
+
+const settings = await getSiteSettings();
+---
+
+<BaseLayout
+  title="Sobre a BRALARMSEG"
+  description="Desde 2007, a BRALARMSEG fornece soluções de iluminação LED industrial em Curitiba/PR. Conheça nossa história, missão e diferenciais."
+>
+  <Header currentPage="sobre" />
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegação estrutural">
+          <a href="/" class="breadcrumb__item">BRALARMSEG</a>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__item breadcrumb__item--current">Sobre</span>
+        </nav>
+        <p class="page-header__eyebrow" style="margin-top:10px">Quem somos</p>
+        <h1 class="page-header__title">SOBRE A BRALARMSEG</h1>
+      </div>
+    </div>
+
+    <!-- Story section -->
+    <section style="padding:80px 0;background:#F5F5F5;">
+      <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+        <div>
+          <p class="eyebrow" style="margin-bottom:12px">Nossa história</p>
+          <h2 class="section-title" style="margin-bottom:20px">O FUTURO DA ILUMINAÇÃO INDUSTRIAL</h2>
+          <p style="font-size:16px;color:#5A5A5A;line-height:1.7;margin-bottom:16px">
+            A iluminação LED industrial representa uma revolução no setor produtivo, combinando eficiência energética incomparável com durabilidade excepcional.
+          </p>
+          <p style="font-size:16px;color:#5A5A5A;line-height:1.7;margin-bottom:16px">
+            Desde 2007, a BRALARMSEG atua em Curitiba/PR fornecendo soluções completas para galpões industriais, frigoríficos, centros logísticos, estacionamentos, portos, aeroportos, supermercados e quadras esportivas.
+          </p>
+          <p style="font-size:16px;color:#5A5A5A;line-height:1.7;margin-bottom:28px">
+            Nossa missão é entregar produtos e projetos de iluminação que genuinamente transformam a operação dos nossos clientes — reduzindo custos, aumentando a segurança e o conforto visual dos colaboradores.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            {[
+              'Redução de até 70% no consumo energético',
+              'Menor necessidade de manutenção',
+              'Sustentável e de longa vida útil',
+              'Produtos com grau IP65 a IP68',
+              'Atendimento técnico especializado',
+              'Projetos luminotécnicos personalizados',
+            ].map(item => (
+              <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:#3A3A3A">
+                <div style="width:6px;height:6px;background:#E35106;border-radius:50%;flex-shrink:0"></div>
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style="background:#0A1628;border-radius:4px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
+          {[['Desde','2007'],['+50.000','Horas de vida'],['IP68','Proteção máx.'],['80%','Menos consumo']].map(([num,lbl]) => (
+            <div style="text-align:center">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:800;color:#E35106;line-height:1">{num}</div>
+              <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#5A7AA0;margin-top:6px">{lbl}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <StatsSection />
+
+    <!-- Values section -->
+    <section style="padding:80px 0;background:#fff">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:48px">
+          <p class="eyebrow" style="margin-bottom:8px">Nossos valores</p>
+          <h2 class="section-title">COMPROMETIDOS COM A EXCELÊNCIA</h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+          {[
+            { title: 'Qualidade', desc: 'Produtos certificados pelo INMETRO e normas internacionais. Cada luminária passa por rigoroso controle de qualidade antes de sair da fábrica.' },
+            { title: 'Eficiência', desc: 'Soluções que entregam o máximo de lumens por watt, garantindo economia real na conta de energia e retorno sobre o investimento.' },
+            { title: 'Confiabilidade', desc: 'Garantia real de até 2 anos, suporte técnico pós-venda e peças de reposição disponíveis. Parceiro de longo prazo para o seu negócio.' },
+          ].map(v => (
+            <div style="padding:28px;border:1px solid #EBEBEB;border-radius:4px">
+              <div style="width:4px;height:32px;background:#E35106;border-radius:2px;margin-bottom:16px"></div>
+              <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:#111;margin-bottom:10px">{v.title}</h3>
+              <p style="font-size:14px;color:#5A5A5A;line-height:1.65">{v.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ServicesSection />
+
+    <!-- CTA banner -->
+    <section style="background:#0A1628;padding:64px 0">
+      <div class="container" style="text-align:center">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,5vw,48px);font-weight:800;color:#fff;margin-bottom:16px">PRONTO PARA TRANSFORMAR SUA OPERAÇÃO?</h2>
+        <p style="font-size:16px;color:#5A7AA0;max-width:520px;margin:0 auto 32px;line-height:1.65">
+          Entre em contato e solicite uma análise técnica gratuita para o seu projeto.
+        </p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a href="/contato" class="btn btn-primary">SOLICITAR ORÇAMENTO</a>
+          <a href="/produtos" class="btn btn-secondary">VER PRODUTOS</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer settings={settings} />
+</BaseLayout>
+
+<style>
+  @media (max-width: 900px) {
+    section > .container[style*="grid-template-columns:1fr 1fr"],
+    section > .container[style*="grid-template-columns:repeat(3,1fr)"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

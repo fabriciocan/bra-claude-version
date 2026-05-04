@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: #F5F5F5; padding: 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field-label { font-size: 12px; font-weight: 600; color: #3A3A3A; letter-spacing: 0.02em; }
+  .field-hint { font-size: 11px; color: #7A7A7A; }
+  .field-error { font-size: 11px; color: #DC2626; }
+  input, select, textarea {
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    color: #111;
+    background: #fff;
+    border: 1px solid #DCDCDC;
+    border-radius: 3px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color 150ms ease-out, box-shadow 150ms ease-out;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: #E35106;
+    box-shadow: 0 0 0 3px rgba(227,81,6,0.12);
+  }
+  input.error { border-color: #DC2626; }
+  input.error:focus { box-shadow: 0 0 0 3px rgba(220,38,38,0.12); }
+  input:disabled { background: #F5F5F5; color: #8A8A8A; cursor: not-allowed; }
+  textarea { resize: vertical; min-height: 80px; }
+  .checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #3A3A3A; }
+  input[type=checkbox] { width: 16px; height: 16px; accent-color: #E35106; cursor: pointer; }
+  input[type=radio] { width: 16px; height: 16px; accent-color: #E35106; cursor: pointer; }
+  .section-label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #7A7A7A; margin-bottom: 8px; grid-column: 1/-1; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="section-label">Text Inputs</div>
+  <div class="field">
+    <label class="field-label">Nome da empresa</label>
+    <input type="text" placeholder="Ex: Metalúrgica São Paulo Ltda.">
+    <span class="field-hint">Razão social ou nome fantasia</span>
+  </div>
+  <div class="field">
+    <label class="field-label">E-mail *</label>
+    <input type="email" value="carlos@empresa.com.br">
+  </div>
+  <div class="field">
+    <label class="field-label">Potência (W)</label>
+    <input type="text" class="error" value="350W">
+    <span class="field-error">Valor inválido — máximo 200W</span>
+  </div>
+  <div class="field">
+    <label class="field-label">Segmento</label>
+    <select>
+      <option>Selecione o segmento...</option>
+      <option>Galpão Industrial</option>
+      <option>Frigorífico</option>
+      <option>Centro Logístico</option>
+      <option>Estacionamento</option>
+    </select>
+  </div>
+  <div class="field" style="grid-column:1/-1">
+    <label class="field-label">Descrição do projeto</label>
+    <textarea placeholder="Descreva o ambiente, altura do pé-direito, área total..."></textarea>
+  </div>
+  <div class="section-label">Checkbox &amp; Radio</div>
+  <div class="field" style="gap:8px">
+    <div class="checkbox-row"><input type="checkbox" checked> Incluir projeto luminotécnico</div>
+    <div class="checkbox-row"><input type="checkbox"> Instalação inclusa</div>
+    <div class="checkbox-row"><input type="checkbox" disabled> Manutenção preventiva (indisponível)</div>
+  </div>
+  <div class="field" style="gap:8px">
+    <div class="checkbox-row"><input type="radio" name="ip" checked> IP65</div>
+    <div class="checkbox-row"><input type="radio" name="ip"> IP66</div>
+    <div class="checkbox-row"><input type="radio" name="ip"> IP68</div>
+  </div>
+</div>
+</body>
+</html>

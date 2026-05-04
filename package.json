@@ -1,0 +1,26 @@
+{
+  "name": "bralarmseg",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "start": "node dist/server/entry.mjs",
+    "sanity:dev": "sanity dev",
+    "sanity:build": "sanity build",
+    "sanity:deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.0.0",
+    "@sanity/client": "^6.0.0",
+"@sanity/vision": "^3.0.0",
+    "astro": "^5.0.0",
+    "nodemailer": "^6.9.0",
+    "sanity": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

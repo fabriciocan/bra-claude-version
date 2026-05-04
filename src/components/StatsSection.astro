@@ -1,0 +1,20 @@
+---
+const stats = [
+  { num: '80%', label: 'Redução no consumo energético' },
+  { num: '+50k', label: 'Horas de vida útil (L70)' },
+  { num: 'IP68', label: 'Proteção máxima disponível' },
+  { num: '160', label: 'lm/W eficiência luminosa' },
+  { num: '~18m', label: 'Payback médio em meses' },
+];
+---
+
+<section class="stats-band">
+  <div class="container stats-band__inner">
+    {stats.map(s => (
+      <div class="stats-band__item">
+        <div class="stats-band__num">{s.num}</div>
+        <div class="stats-band__label">{s.label}</div>
+      </div>
+    ))}
+  </div>
+</section>

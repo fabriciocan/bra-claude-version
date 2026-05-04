@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ApplicationsSection from '../components/ApplicationsSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import StatsSection from '../components/StatsSection.astro';
+import { getSiteSettings } from '../lib/queries';
+
+const settings = await getSiteSettings();
+
+const applications = [
+  {
+    title: 'Galpões Industriais',
+    img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&q=80',
+    desc: 'Luminárias Highbay de alta eficiência para pé-direito de 5 a 20 metros. Iluminação uniforme que aumenta a produtividade e reduz acidentes.',
+    products: ['HIGHBAY MAGNA', 'HIGHBAY INDUSTRIAL', 'UFO ELITE'],
+    specs: 'IP66 | 140–160 lm/W | 50.000h',
+  },
+  {
+    title: 'Frigoríficos e Câmaras Frias',
+    img: 'https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?w=1200&q=80',
+    desc: 'Produtos com IP65 e resistência a variações extremas de temperatura (-30°C a +50°C), especialmente indicados para ambientes frigoríficos.',
+    products: ['HIGHBAY INDUSTRIAL'],
+    specs: 'IP65 | Temp. -30°C a +50°C | 50.000h',
+  },
+  {
+    title: 'Centros Logísticos',
+    img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80',
+    desc: 'Soluções de iluminação para corredores, docas e áreas de triagem. Alta uniformidade e eficiência para operações 24/7.',
+    products: ['HIGHBAY MAGNA', 'HIGHBAY CLASSIC', 'UFO LUXI'],
+    specs: 'IP66 | Operação 24/7 | CRI > 80',
+  },
+  {
+    title: 'Estacionamentos',
+    img: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200&q=80',
+    desc: 'Projetores UFO e Highbay para estacionamentos cobertos e externos. Iluminação que aumenta a segurança e reduz custos operacionais.',
+    products: ['UFO LUXI', 'UFO ELITE', 'PROJETOR VEGAS'],
+    specs: 'IP65–IP66 | Externo/Interno | 50.000h',
+  },
+  {
+    title: 'Quadras Esportivas',
+    img: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1200&q=80',
+    desc: 'Projetores com ângulo ajustável e alta uniformidade lumínica para quadras poliesportivas, cobertas e ao ar livre.',
+    products: ['PROJETOR SPORT', 'UFO ELITE'],
+    specs: 'IP66 | Ângulo ajustável | Anti-ofuscamento',
+  },
+  {
+    title: 'Portos e Aeroportos',
+    img: 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1200&q=80',
+    desc: 'Soluções de iluminação para pátios, pistas e áreas externas de grande extensão. Projetores de alta potência e IP66.',
+    products: ['PROJETOR VEGAS', 'PROJETOR SPORT', 'FOX IR'],
+    specs: 'IP66 | Alta potência | CFTV-ready',
+  },
+  {
+    title: 'Supermercados e Varejo',
+    img: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=1200&q=80',
+    desc: 'Iluminação de emergência e luminárias LED para ambientes comerciais. Conformidade com AVCB e normas de bombeiros.',
+    products: ['LUMO EMERGÊNCIA', 'UFO LUXI'],
+    specs: 'IP20 | Emergência 3h | ABNT NBR 10898',
+  },
+  {
+    title: 'Torres Solares e Off-grid',
+    img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=80',
+    desc: 'O único projetor 24Vdc do portfólio, compatível com sistemas solares e off-grid. Solução completa para áreas remotas.',
+    products: ['FAROS24'],
+    specs: '24Vdc | IP66 | Compatível solar',
+  },
+];
+---
+
+<BaseLayout
+  title="Aplicações — Ambientes e Segmentos"
+  description="BRALARMSEG atende galpões industriais, frigoríficos, centros logísticos, estacionamentos, quadras esportivas, portos e muito mais."
+>
+  <Header currentPage="aplicacoes" />
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Navegação estrutural">
+          <a href="/" class="breadcrumb__item">BRALARMSEG</a>
+          <span class="breadcrumb__sep">/</span>
+          <span class="breadcrumb__item breadcrumb__item--current">Aplicações</span>
+        </nav>
+        <p class="page-header__eyebrow" style="margin-top:10px">Onde atuamos</p>
+        <h1 class="page-header__title">APLICAÇÕES E AMBIENTES</h1>
+        <p class="page-header__sub">Soluções LED para os segmentos industriais mais exigentes.</p>
+      </div>
+    </div>
+
+    <StatsSection />
+
+    <!-- Detailed applications -->
+    <section style="padding:80px 0;background:#F5F5F5">
+      <div class="container">
+        <div style="display:flex;flex-direction:column;gap:48px">
+          {applications.map((app, i) => (
+            <div style={`display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;${i % 2 === 1 ? 'direction:rtl' : ''}`}>
+              <div style="border-radius:4px;overflow:hidden;height:280px;direction:ltr">
+                <img
+                  src={app.img}
+                  alt={app.title}
+                  style="width:100%;height:100%;object-fit:cover"
+                  loading="lazy"
+                />
+              </div>
+              <div style="direction:ltr">
+                <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:800;color:#111;margin-bottom:12px">{app.title}</h2>
+                <p style="font-size:15px;color:#5A5A5A;line-height:1.7;margin-bottom:20px">{app.desc}</p>
+
+                <div style="margin-bottom:16px">
+                  <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#7A7A7A;margin-bottom:8px">Produtos recomendados</div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    {app.products.map(prod => (
+                      <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;background:#0A1628;color:#fff;padding:4px 10px;border-radius:2px">{prod}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5A7AA0;margin-bottom:20px">{app.specs}</div>
+
+                <a href="/produtos" class="btn btn-primary btn-sm">Ver produtos →</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ServicesSection />
+
+    <!-- CTA banner -->
+    <section style="background:#0A1628;padding:64px 0">
+      <div class="container" style="text-align:center">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,5vw,48px);font-weight:800;color:#fff;margin-bottom:16px">
+          SEU SEGMENTO NÃO ESTÁ AQUI?
+        </h2>
+        <p style="font-size:16px;color:#5A7AA0;max-width:520px;margin:0 auto 32px;line-height:1.65">
+          Temos soluções para qualquer ambiente industrial. Entre em contato e nossa equipe técnica encontrará o produto ideal para o seu projeto.
+        </p>
+        <a href="/contato" class="btn btn-primary">FALAR COM UM ESPECIALISTA</a>
+      </div>
+    </section>
+  </main>
+
+  <Footer settings={settings} />
+</BaseLayout>
+
+<style>
+  @media (max-width: 900px) {
+    section .container > div > div[style*="grid-template-columns:1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+      direction: ltr !important;
+    }
+  }
+</style>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: #F5F5F5; padding: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .tile { border-radius: 4px; padding: 24px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 110px; position: relative; }
+  .tile-label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; position: absolute; bottom: 8px; right: 10px; opacity: 0.5; }
+  .logo-lockup { display: flex; flex-direction: column; align-items: flex-start; }
+  .logo-word { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 800; line-height: 1; letter-spacing: -0.01em; }
+  .logo-sub { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 2px; }
+  .logo-rule { width: 100%; height: 2px; margin-top: 4px; }
+  /* Don'ts */
+  .dont { position: relative; }
+  .dont::after { content: '✕ Não use'; position: absolute; top: 6px; left: 8px; font-size: 9px; font-weight: 700; color: #DC2626; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+<div class="grid">
+  <!-- On white -->
+  <div class="tile" style="background:#fff;border:1px solid #DCDCDC">
+    <div class="logo-lockup">
+      <div class="logo-word" style="color:#111">BR<span style="color:#E35106">A</span>LARMSEG</div>
+      <div class="logo-rule" style="background:#E35106"></div>
+      <div class="logo-sub" style="color:#7A7A7A">Segurança e Emergência</div>
+    </div>
+    <div class="tile-label" style="color:#111">Fundo branco ✓</div>
+  </div>
+  <!-- On dark -->
+  <div class="tile" style="background:#0A1628">
+    <div class="logo-lockup">
+      <div class="logo-word" style="color:#fff">BR<span style="color:#E35106">A</span>LARMSEG</div>
+      <div class="logo-rule" style="background:#E35106"></div>
+      <div class="logo-sub" style="color:#A0B4CC">Segurança e Emergência</div>
+    </div>
+    <div class="tile-label" style="color:#fff">Fundo escuro ✓</div>
+  </div>
+  <!-- On orange -->
+  <div class="tile" style="background:#E35106">
+    <div class="logo-lockup">
+      <div class="logo-word" style="color:#fff">BR<span style="color:#fff;opacity:0.75">A</span>LARMSEG</div>
+      <div class="logo-rule" style="background:rgba(255,255,255,0.5)"></div>
+      <div class="logo-sub" style="color:rgba(255,255,255,0.8)">Segurança e Emergência</div>
+    </div>
+    <div class="tile-label" style="color:#fff">Fundo laranja ✓</div>
+  </div>
+  <!-- Clear space rule -->
+  <div class="tile" style="background:#fff;border:1px solid #DCDCDC;grid-column:1/-1;min-height:80px;flex-direction:row;gap:32px;justify-content:flex-start;padding:20px 28px">
+    <div style="position:relative;display:inline-block">
+      <div style="position:absolute;inset:-12px;border:1px dashed #DCDCDC;border-radius:2px"></div>
+      <div class="logo-word" style="color:#111;font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800">BR<span style="color:#E35106">A</span>LARMSEG</div>
+    </div>
+    <div style="font-size:13px;color:#5A5A5A;line-height:1.6">
+      <strong style="color:#111">Área de respiro:</strong> mínimo igual à altura da letra "R" em todos os lados.<br>
+      Nunca posicionar texto ou elementos dentro da zona de exclusão.
+    </div>
+  </div>
+</div>
+</body>
+</html>

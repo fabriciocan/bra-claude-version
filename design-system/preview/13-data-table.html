@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: #fff; padding: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #7A7A7A; padding: 8px 12px; text-align: left;
+    border-bottom: 2px solid #111; background: #fff;
+  }
+  tbody tr { border-bottom: 1px solid #EBEBEB; transition: background 100ms; }
+  tbody tr:hover { background: #FAFAFA; }
+  tbody tr:last-child { border-bottom: none; }
+  td { padding: 9px 12px; color: #3A3A3A; vertical-align: middle; }
+  td.model { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; color: #111; }
+  td.mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .badge { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 2px; letter-spacing: 0.04em; }
+  .b-blue { background: #DCE8F8; color: #002878; }
+  .b-dark { background: #111; color: #fff; }
+  .b-green { background: #E6F5EE; color: #1A8A4A; }
+  .highlight { background: #FDE8DA !important; }
+  caption { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #7A7A7A; text-align: left; padding-bottom: 8px; }
+</style>
+</head>
+<body>
+<table>
+  <caption>Comparativo Técnico — Projetores LED</caption>
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Potência</th>
+      <th>Proteção</th>
+      <th>Eficiência</th>
+      <th>Vida Útil</th>
+      <th>Aplicação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="model">UFO LUXI</td>
+      <td class="mono">100–200W</td>
+      <td><span class="badge b-blue">IP65</span></td>
+      <td class="mono">130 lm/W</td>
+      <td class="mono">25.000 h</td>
+      <td>Galpão / Fábrica</td>
+    </tr>
+    <tr class="highlight">
+      <td class="model">UFO ELITE ★</td>
+      <td class="mono">100–200W</td>
+      <td><span class="badge b-blue">IP65</span></td>
+      <td class="mono">160 lm/W</td>
+      <td class="mono">50.000 h</td>
+      <td>Alta performance</td>
+    </tr>
+    <tr>
+      <td class="model">SPORT</td>
+      <td class="mono">50–200W</td>
+      <td><span class="badge b-dark">IP66</span></td>
+      <td class="mono">140 lm/W</td>
+      <td class="mono">50.000 h</td>
+      <td>Quadra / Galpão</td>
+    </tr>
+    <tr>
+      <td class="model">VEGAS</td>
+      <td class="mono">50–200W</td>
+      <td><span class="badge b-dark">IP66</span></td>
+      <td class="mono">140 lm/W</td>
+      <td class="mono">50.000 h</td>
+      <td>Industrial / Externo</td>
+    </tr>
+    <tr>
+      <td class="model">FAROS24</td>
+      <td class="mono">50–100W</td>
+      <td><span class="badge b-dark">IP66</span></td>
+      <td class="mono">130 lm/W</td>
+      <td class="mono">30.000 h</td>
+      <td>Torres Solares 24Vdc</td>
+    </tr>
+    <tr>
+      <td class="model">FOX IR</td>
+      <td class="mono">35–50W</td>
+      <td><span class="badge b-dark">IP66</span></td>
+      <td>—</td>
+      <td class="mono">25.000 h</td>
+      <td>Segurança / CFTV</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

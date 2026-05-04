@@ -1,0 +1,62 @@
+---
+const services = [
+  {
+    title: 'Análise Técnica',
+    desc: 'Avaliação completa do ambiente, medição de luminosidade e análise de necessidades específicas do projeto.',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+  },
+  {
+    title: 'Projeto Personalizado',
+    desc: 'Projeto luminotécnico detalhado com especificações técnicas e layout otimizado para o seu espaço.',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>`,
+  },
+  {
+    title: 'Venda de Produtos LED',
+    desc: 'Luminárias, projetores e refletores LED industriais de alta qualidade com garantia estendida.',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`,
+  },
+  {
+    title: 'Instalação Profissional',
+    desc: 'Equipe especializada realiza a instalação completa com segurança e dentro das normas técnicas vigentes.',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>`,
+  },
+  {
+    title: 'Eficiência Comprovada',
+    desc: 'Cálculo de ROI e economia energética para tomada de decisão assertiva e retorno garantido.',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  },
+  {
+    title: 'Suporte Técnico',
+    desc: 'Acompanhamento pós-instalação e suporte técnico contínuo para máximo desempenho do sistema.',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.64A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>`,
+  },
+];
+---
+
+<section style="padding: 80px 0; background: #fff;">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;">
+      <p class="eyebrow" style="margin-bottom:8px">O que fazemos</p>
+      <h2 class="section-title">PROJETOS E PRODUTOS</h2>
+      <p style="font-size:16px; color:#5A5A5A; max-width:560px; margin:12px auto 0; line-height:1.65">
+        Soluções completas em iluminação industrial: do projeto à instalação e suporte técnico.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      {services.map(s => (
+        <div class="service-card">
+          <div class="service-card__icon">
+            <span style="color:#E35106" set:html={s.icon} />
+          </div>
+          <div class="service-card__title">{s.title}</div>
+          <p class="service-card__desc">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+      <a href="/contato" class="btn btn-primary">SOLICITAR ORÇAMENTO</a>
+    </div>
+  </div>
+</section>

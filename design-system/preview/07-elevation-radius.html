@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: #F5F5F5; padding: 24px; }
+  .section { margin-bottom: 20px; }
+  .label { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #7A7A7A; margin-bottom: 12px; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+  .shadow-box { background: #fff; width: 80px; height: 56px; border-radius: 4px; display: flex; flex-direction: column; justify-content: flex-end; padding: 6px 8px; }
+  .shadow-name { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #7A7A7A; }
+  .radius-row { display: flex; gap: 12px; align-items: center; }
+  .radius-box { width: 52px; height: 52px; background: #E35106; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .radius-label { font-size: 9px; font-weight: 600; color: #fff; letter-spacing: 0.04em; }
+  .radius-val { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="section">
+  <div class="label">Shadows — Elevation Scale</div>
+  <div class="row">
+    <div class="shadow-box" style="box-shadow:0 1px 2px rgba(0,0,0,0.06)"><div class="shadow-name">xs</div></div>
+    <div class="shadow-box" style="box-shadow:0 1px 4px rgba(0,0,0,0.08)"><div class="shadow-name">sm</div></div>
+    <div class="shadow-box" style="box-shadow:0 2px 8px rgba(0,0,0,0.10)"><div class="shadow-name">md</div></div>
+    <div class="shadow-box" style="box-shadow:0 4px 16px rgba(0,0,0,0.12)"><div class="shadow-name">lg</div></div>
+    <div class="shadow-box" style="box-shadow:0 8px 32px rgba(0,0,0,0.14)"><div class="shadow-name">xl</div></div>
+    <div class="shadow-box" style="box-shadow:0 16px 48px rgba(0,0,0,0.18)"><div class="shadow-name">2xl</div></div>
+    <div class="shadow-box" style="box-shadow:inset 0 1px 3px rgba(0,0,0,0.08)"><div class="shadow-name">inner</div></div>
+  </div>
+</div>
+<div class="section">
+  <div class="label">Border Radius</div>
+  <div class="radius-row">
+    <div class="radius-box" style="border-radius:0"><div class="radius-label">none</div><div class="radius-val">0px</div></div>
+    <div class="radius-box" style="border-radius:2px"><div class="radius-label">xs</div><div class="radius-val">2px</div></div>
+    <div class="radius-box" style="border-radius:3px"><div class="radius-label">sm</div><div class="radius-val">3px</div></div>
+    <div class="radius-box" style="border-radius:4px"><div class="radius-label">md</div><div class="radius-val">4px</div></div>
+    <div class="radius-box" style="border-radius:6px"><div class="radius-label">lg</div><div class="radius-val">6px</div></div>
+    <div class="radius-box" style="border-radius:8px"><div class="radius-label">xl</div><div class="radius-val">8px</div></div>
+    <div class="radius-box" style="border-radius:9999px;width:80px"><div class="radius-label">full</div><div class="radius-val">9999px</div></div>
+  </div>
+</div>
+</body>
+</html>

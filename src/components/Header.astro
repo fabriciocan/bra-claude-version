@@ -1,0 +1,131 @@
+---
+interface Props {
+  currentPage?: string;
+}
+const { currentPage = '' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Início', id: 'home' },
+  { href: '/sobre', label: 'Sobre', id: 'sobre' },
+  { href: '/produtos', label: 'Produtos', id: 'produtos' },
+  { href: '/aplicacoes', label: 'Aplicações', id: 'aplicacoes' },
+];
+---
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <span class="topbar__item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.64A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+      </svg>
+      (41) 99274-4818 | (41) 3045-9744
+    </span>
+    <span class="topbar__item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      bra@bralarmseg.com.br
+    </span>
+    <span class="topbar__item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+      Curitiba, PR — desde 2007
+    </span>
+  </div>
+</div>
+
+<!-- Main nav -->
+<nav class="site-nav" id="main-nav">
+  <div class="container site-nav__inner">
+    <a href="/" class="site-nav__logo" aria-label="BRALARMSEG — Início">
+      <div class="site-nav__logo-word">
+        BR<span style="color: #E35106">A</span>LARMSEG
+      </div>
+      <div class="site-nav__logo-sub">Segurança e Emergência</div>
+    </a>
+
+    <div class="site-nav__links" id="nav-links">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`site-nav__link${currentPage === link.id ? ' site-nav__link--active' : ''}`}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="/contato" class="site-nav__cta">Solicitar Orçamento</a>
+    </div>
+
+    <button
+      class="site-nav__hamburger"
+      id="hamburger-btn"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu de navegação">
+  <div class="mobile-menu__header">
+    <a href="/" class="site-nav__logo" style="text-decoration:none">
+      <div class="site-nav__logo-word" style="color:#fff">
+        BR<span style="color:#E35106">A</span>LARMSEG
+      </div>
+      <div class="site-nav__logo-sub">Segurança e Emergência</div>
+    </a>
+    <button class="mobile-menu__close" id="close-menu-btn" aria-label="Fechar menu">×</button>
+  </div>
+  <nav class="mobile-menu__links">
+    {navLinks.map(link => (
+      <a
+        href={link.href}
+        class={`mobile-menu__link${currentPage === link.id ? ' mobile-menu__link--active' : ''}`}
+      >
+        {link.label}
+      </a>
+    ))}
+    <a href="/contato" class="mobile-menu__cta">Solicitar Orçamento</a>
+  </nav>
+</div>
+
+<script>
+  // Scroll shadow
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav?.classList.toggle('site-nav--scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('close-menu-btn');
+
+  function openMenu() {
+    mobileMenu?.classList.add('mobile-menu--open');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileMenu?.classList.remove('mobile-menu--open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  mobileMenu?.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) closeMenu();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>

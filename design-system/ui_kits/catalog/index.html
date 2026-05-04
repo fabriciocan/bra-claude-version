@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRALARMSEG — Catálogo de Produtos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: #F5F5F5; color: #111; -webkit-font-smoothing: antialiased; }
+  #root { min-height: 100vh; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #F0F0F0; }
+  ::-webkit-scrollbar-thumb { background: #BABABA; border-radius: 3px; }
+
+  /* Page transitions */
+  .page-enter { animation: pageIn 180ms ease-out; }
+  @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  /* Utility */
+  .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+
+/* ============================================================
+   DATA
+   ============================================================ */
+const PRODUCTS = [
+  {
+    id: 'hbm150',
+    name: 'HIGHBAY MAGNA',
+    fullName: 'Luminária Highbay Magna',
+    category: 'Highbay',
+    tag: 'highbay',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-hbm150.jpg',
+    shortDesc: 'Ideal para galpões e fábricas com pé-direito elevado.',
+    longDesc: 'A Luminária Highbay Magna foi projetada para ambientes industriais de grande porte, com pé-direito superior a 8 metros. Seu corpo em alumínio de alta pressão garante excelente dissipação térmica, prolongando a vida útil do sistema LED.',
+    badge: 'Mais vendido',
+    badgeColor: '#E35106',
+    specs: {
+      'Potência': '150W',
+      'Proteção': 'IP66',
+      'Eficiência': '140 lm/W',
+      'Fluxo luminoso': '21.000 lm',
+      'Temperatura de cor': '4000K / 5700K',
+      'Tensão': '100–277 Vac',
+      'Fator de potência': '> 0,95',
+      'Vida útil': '50.000 h (L70)',
+      'Ângulo de abertura': '120°',
+      'Peso': '3,2 kg',
+      'Dimensões': 'Ø 340 × 150 mm',
+      'Garantia': '2 anos',
+    },
+    applications: ['Galpões industriais','Fábricas','Centros logísticos','Armazéns'],
+    certifications: ['INMETRO','IP66','CE','RoHS'],
+  },
+  {
+    id: 'hbc',
+    name: 'HIGHBAY CLASSIC',
+    fullName: 'Luminária Highbay Classic',
+    category: 'Highbay',
+    tag: 'highbay',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-highbayclassic.jpg',
+    shortDesc: 'Eficiência luminosa 140lm/W para ambientes industriais.',
+    longDesc: 'A Highbay Classic combina eficiência energética com custo-benefício excepcional. Disponível em 100W e 150W, atende a grande maioria dos projetos industriais com altura de instalação entre 5 e 10 metros.',
+    badge: null,
+    specs: {
+      'Potência': '100W / 150W',
+      'Proteção': 'IP20',
+      'Eficiência': '140 lm/W',
+      'Fluxo luminoso': '14.000–21.000 lm',
+      'Temperatura de cor': '4000K / 5700K',
+      'Tensão': '100–277 Vac',
+      'Fator de potência': '> 0,95',
+      'Vida útil': '50.000 h (L70)',
+      'Ângulo de abertura': '120°',
+      'Peso': '2,8 kg',
+      'Dimensões': 'Ø 310 × 140 mm',
+      'Garantia': '2 anos',
+    },
+    applications: ['Galpões industriais','Fábricas','Montadoras'],
+    certifications: ['INMETRO','IP20','CE','RoHS'],
+  },
+  {
+    id: 'hbi',
+    name: 'HIGHBAY INDUSTRIAL',
+    fullName: 'Luminária Highbay Industrial',
+    category: 'Highbay',
+    tag: 'highbay',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-hbi.jpg',
+    shortDesc: 'Corpo em alumínio injetado com alta dissipação térmica.',
+    longDesc: 'A Highbay Industrial é a escolha para os ambientes mais exigentes. Com grau de proteção IP65 e corpo em alumínio injetado sob pressão, resiste a poeira, jatos d\'água e variações extremas de temperatura.',
+    badge: 'IP65',
+    badgeColor: '#003DA5',
+    specs: {
+      'Potência': '100W / 150W / 200W',
+      'Proteção': 'IP65',
+      'Eficiência': '140 lm/W',
+      'Fluxo luminoso': '14.000–28.000 lm',
+      'Temperatura de cor': '4000K / 5700K',
+      'Tensão': '100–277 Vac',
+      'Fator de potência': '> 0,95',
+      'Vida útil': '50.000 h (L70)',
+      'Ângulo de abertura': '90° / 120°',
+      'Peso': '4,1 kg',
+      'Dimensões': 'Ø 360 × 170 mm',
+      'Garantia': '2 anos',
+    },
+    applications: ['Frigoríficos','Câmaras frias','Indústria alimentícia','Petroquímica'],
+    certifications: ['INMETRO','IP65','CE','RoHS'],
+  },
+  {
+    id: 'ufo-luxi',
+    name: 'UFO LUXI',
+    fullName: 'Projetor UFO Luxi',
+    category: 'Projetor UFO',
+    tag: 'ufo',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-ufo.jpg',
+    shortDesc: 'Expectativa de vida útil de 25.000 horas.',
+    longDesc: 'O Projetor UFO Luxi oferece uma solução versátil para instalações industriais e comerciais, com design compacto e alto desempenho. Seu formato UFO facilita a instalação em estruturas tubulares.',
+    badge: null,
+    specs: {
+      'Potência': '100W / 150W / 200W',
+      'Proteção': 'IP65',
+      'Eficiência': '130 lm/W',
+      'Fluxo luminoso': '13.000–26.000 lm',
+      'Temperatura de cor': '4000K / 5700K',
+      'Tensão': '100–277 Vac',
+      'Fator de potência': '> 0,95',
+      'Vida útil': '25.000 h',
+      'Ângulo de abertura': '120°',
+      'Peso': '2,4 kg',
+      'Dimensões': 'Ø 280 × 80 mm',
+      'Garantia': '1 ano',
+    },
+    applications: ['Estacionamentos','Galpões','Supermercados','Quadras esportivas'],
+    certifications: ['IP65','CE','RoHS'],
+  },
+  {
+    id: 'ufo-elite',
+    name: 'UFO ELITE',
+    fullName: 'Projetor UFO Elite',
+    category: 'Projetor UFO',
+    tag: 'ufo',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-ufoelite.jpg',
+    shortDesc: '160lm/W — vida útil de 50.000 horas (L70).',
+    longDesc: 'O UFO Elite representa o estado da arte em eficiência luminosa. Com 160lm/W, é o produto de maior rendimento do portfólio BRALARMSEG, indicado para projetos que exigem máxima eficiência e menor TCO (Total Cost of Ownership).',
+    badge: 'Alta eficiência',
+    badgeColor: '#1A8A4A',
+    specs: {
+      'Potência': '100W / 150W / 200W',
+      'Proteção': 'IP65',
+      'Eficiência': '160 lm/W',
+      'Fluxo luminoso': '16.000–32.000 lm',
+      'Temperatura de cor': '4000K / 5700K',
+      'Tensão': '100–277 Vac',
+      'Fator de potência': '> 0,97',
+      'Vida útil': '50.000 h (L70)',
+      'Ângulo de abertura': '90° / 120°',
+      'Peso': '2,9 kg',
+      'Dimensões': 'Ø 300 × 90 mm',
+      'Garantia': '2 anos',
+    },
+    applications: ['Alta performance','Indústria farmacêutica','Logística de precisão'],
+    certifications: ['INMETRO','IP65','CE','RoHS','DLC'],
+  },
+  {
+    id: 'sport',
+    name: 'SPORT',
+    fullName: 'Projetor Sport',
+    category: 'Projetor',
+    tag: 'projetor',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-sport_plus.jpg',
+    shortDesc: 'Ângulo ajustável para quadras e galpões.',
+    longDesc: 'O Projetor Sport foi desenvolvido para aplicações que exigem alta intensidade luminosa em áreas amplas. Com ângulo de instalação ajustável em 0–90°, adapta-se a quadras esportivas, galpões e fachadas.',
+    badge: null,
+    specs: {
+      'Potência': '50W / 100W / 150W / 200W',
+      'Proteção': 'IP66',
+      'Eficiência': '140 lm/W',
+      'Fluxo luminoso': '7.000–28.000 lm',
+      'Temperatura de cor': '4000K / 5700K / 3000K',
+      'Tensão': '100–277 Vac',
+      'Fator de potência': '> 0,95',
+      'Vida útil': '50.000 h (L70)',
+      'Ângulo ajustável': '0–90°',
+      'Peso': '3,8 kg',
+      'Dimensões': '380 × 280 × 90 mm',
+      'Garantia': '2 anos',
+    },
+    applications: ['Quadras esportivas','Galpões','Pátios industriais','Portos'],
+    certifications: ['IP66','CE','RoHS'],
+  },
+  {
+    id: 'vegas',
+    name: 'VEGAS',
+    fullName: 'Projetor Vegas',
+    category: 'Projetor',
+    tag: 'projetor',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-vegas.jpg',
+    shortDesc: 'Design moderno com ângulo de instalação ajustável.',
+    longDesc: 'O Projetor Vegas une estética moderna com desempenho técnico sólido. Com corpo em alumínio fundido e vidro temperado de 4mm, é indicado para áreas externas e ambientes com exposição à chuva e poeira.',
+    badge: null,
+    specs: {
+      'Potência': '50W / 100W / 150W / 200W',
+      'Proteção': 'IP66',
+      'Eficiência': '140 lm/W',
+      'Fluxo luminoso': '7.000–28.000 lm',
+      'Temperatura de cor': '4000K / 5700K',
+      'Tensão': '100–277 Vac',
+      'Fator de potência': '> 0,95',
+      'Vida útil': '50.000 h (L70)',
+      'Ângulo ajustável': '0–180°',
+      'Peso': '4,2 kg',
+      'Dimensões': '400 × 300 × 100 mm',
+      'Garantia': '2 anos',
+    },
+    applications: ['Estacionamentos externos','Pátios','Fachadas','Aeroportos'],
+    certifications: ['IP66','CE','RoHS'],
+  },
+  {
+    id: 'faros24',
+    name: 'FAROS24',
+    fullName: 'Projetor Faros24',
+    category: 'Projetor',
+    tag: 'projetor',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-faros24_plus.jpg',
+    shortDesc: 'Alimentação 24Vdc ideal para torres solares.',
+    longDesc: 'O Faros24 é o único projetor do portfólio BRALARMSEG com alimentação em 24Vdc, desenvolvido especialmente para sistemas off-grid e torres solares. Compatível com baterias e controladores de carga fotovoltaicos.',
+    badge: '24Vdc',
+    badgeColor: '#003DA5',
+    specs: {
+      'Potência': '50W / 100W',
+      'Proteção': 'IP66',
+      'Eficiência': '130 lm/W',
+      'Fluxo luminoso': '6.500–13.000 lm',
+      'Temperatura de cor': '4000K / 5700K',
+      'Tensão': '24 Vdc',
+      'Fator de potência': '> 0,95',
+      'Vida útil': '30.000 h',
+      'Ângulo ajustável': '0–90°',
+      'Peso': '2,6 kg',
+      'Dimensões': '340 × 260 × 80 mm',
+      'Garantia': '1 ano',
+    },
+    applications: ['Torres solares','Off-grid','Áreas remotas','Mineração'],
+    certifications: ['IP66','CE','RoHS'],
+  },
+  {
+    id: 'foxir',
+    name: 'FOX IR',
+    fullName: 'Projetor Fox IR',
+    category: 'Projetor',
+    tag: 'projetor',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-foxir.jpg',
+    shortDesc: 'Infravermelho 850nm ou 940nm para segurança e vigilância.',
+    longDesc: 'O Fox IR é um iluminador infravermelho de alta potência para sistemas CFTV. Disponível em 850nm (com leve brilho vermelho visível) ou 940nm (completamente invisível ao olho humano), complementa câmeras de segurança em ambientes externos.',
+    badge: 'IR',
+    badgeColor: '#5A3A8A',
+    specs: {
+      'Potência': '35W / 50W',
+      'Proteção': 'IP66',
+      'Comprimento de onda': '850nm / 940nm',
+      'Alcance IR': 'até 80m (850nm)',
+      'Ângulo de abertura': '30° / 60° / 90°',
+      'Tensão': '100–277 Vac',
+      'Fator de potência': '> 0,90',
+      'Vida útil': '25.000 h',
+      'Ângulo ajustável': '0–90°',
+      'Peso': '2,1 kg',
+      'Dimensões': '290 × 220 × 70 mm',
+      'Garantia': '1 ano',
+    },
+    applications: ['Segurança perimetral','CFTV','Portos','Aeroportos'],
+    certifications: ['IP66','CE'],
+  },
+  {
+    id: 'lumo',
+    name: 'LUMO EMERGÊNCIA',
+    fullName: 'Luminária Lumo Emergência',
+    category: 'Emergência',
+    tag: 'emergencia',
+    imgUrl: 'https://www.bralarmseg.com.br/imagens/ilum_industrial/br-lumoemergencia.jpg',
+    shortDesc: '130lm/W para supermercados e escritórios.',
+    longDesc: 'A Luminária Lumo Emergência garante iluminação de segurança em caso de queda de energia. Com bateria interna de lítio, autonomia de 3 horas e eficiência de 130lm/W, atende a normas de AVCB e laudos de bombeiros.',
+    badge: 'Emergência',
+    badgeColor: '#DC2626',
+    specs: {
+      'Potência': '50W',
+      'Proteção': 'IP20',
+      'Eficiência': '130 lm/W',
+      'Fluxo luminoso': '6.500 lm',
+      'Temperatura de cor': '6500K',
+      'Tensão': '100–240 Vac',
+      'Bateria': 'Lítio 6V 4Ah',
+      'Autonomia': '3 horas',
+      'Vida útil': '50.000 h',
+      'Dimensões': '580 × 80 × 60 mm',
+      'Garantia': '2 anos',
+    },
+    applications: ['Supermercados','Escritórios','Shoppings','Saídas de emergência'],
+    certifications: ['INMETRO','ABNT NBR 10898','CE'],
+  },
+];
+
+const CATEGORIES = ['Todos', 'Highbay', 'Projetor UFO', 'Projetor', 'Emergência'];
+
+/* ============================================================
+   SHARED COMPONENTS
+   ============================================================ */
+
+const CatalogNav = ({ page, onNavigate, compareCount }) =>
+  React.createElement('nav', { style: cnStyles.nav },
+    React.createElement('div', { style: cnStyles.inner },
+      React.createElement('div', {
+        style: cnStyles.logo,
+        onClick: () => onNavigate('catalog'),
+        role: 'button'
+      },
+        React.createElement('div', { style: cnStyles.logoWord },
+          'BR', React.createElement('span', { style: { color: '#E35106' } }, 'A'), 'LARMSEG'
+        ),
+        React.createElement('div', { style: cnStyles.logoSub }, 'Catálogo de Produtos')
+      ),
+      React.createElement('div', { style: cnStyles.navRight },
+        React.createElement('a', {
+          href: '#', style: { ...cnStyles.navLink, ...(page === 'catalog' ? cnStyles.navLinkActive : {}) },
+          onClick: e => { e.preventDefault(); onNavigate('catalog'); }
+        }, 'Todos os Produtos'),
+        React.createElement('button', {
+          style: {
+            ...cnStyles.compareBtn,
+            ...(compareCount > 0 ? cnStyles.compareBtnActive : {})
+          },
+          onClick: () => compareCount > 0 && onNavigate('compare')
+        },
+          React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, style: { flexShrink: 0 } },
+            React.createElement('polyline', { points: '22 12 18 12 15 21 9 3 6 12 2 12' })
+          ),
+          compareCount > 0 ? `Comparar (${compareCount})` : 'Comparar',
+          compareCount > 0 && React.createElement('span', { style: cnStyles.compareBadge }, compareCount)
+        ),
+        React.createElement('a', {
+          href: '#', style: cnStyles.ctaBtn,
+          onClick: e => e.preventDefault()
+        }, 'Solicitar Orçamento')
+      )
+    )
+  );
+
+const cnStyles = {
+  nav: { background: '#fff', boxShadow: '0 1px 4px rgba(0,0,0,0.10)', position: 'sticky', top: 0, zIndex: 100 },
+  inner: { maxWidth: 1280, margin: '0 auto', padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
+  logo: { cursor: 'pointer', display: 'flex', flexDirection: 'column' },
+  logoWord: { fontFamily: "'Barlow Condensed', sans-serif", fontSize: 22, fontWeight: 800, color: '#111', lineHeight: 1 },
+  logoSub: { fontSize: 9, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#8A8A8A', marginTop: 1 },
+  navRight: { display: 'flex', alignItems: 'center', gap: 8 },
+  navLink: { fontFamily: "'Barlow', sans-serif", fontSize: 13, fontWeight: 600, color: '#3A3A3A', textDecoration: 'none', padding: '6px 12px', borderRadius: 3, transition: 'color 150ms' },
+  navLinkActive: { color: '#E35106' },
+  compareBtn: { fontFamily: "'Barlow Condensed', sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', background: '#F0F0F0', color: '#5A5A5A', border: 'none', padding: '7px 14px', borderRadius: 3, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, transition: 'all 150ms' },
+  compareBtnActive: { background: '#0A1628', color: '#fff' },
+  compareBadge: { background: '#E35106', color: '#fff', borderRadius: '50%', width: 16, height: 16, fontSize: 10, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  ctaBtn: { fontFamily: "'Barlow Condensed', sans-serif", fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', background: '#E35106', color: '#fff', padding: '8px 16px', borderRadius: 3, textDecoration: 'none' }
+};
+
+/* ============================================================
+   PAGE 1 — CATALOG LISTING
+   ============================================================ */
+
+const CatalogPage = ({ onSelectProduct, compareList, onToggleCompare }) => {
+  const [activeCategory, setActiveCategory] = React.useState('Todos');
+  const [viewMode, setViewMode] = React.useState('grid'); // grid | list
+  const [search, setSearch] = React.useState('');
+  const [sortBy, setSortBy] = React.useState('default');
+
+  const filtered = PRODUCTS.filter(p => {
+    const matchCat = activeCategory === 'Todos' || p.category === activeCategory;
+    const matchSearch = search === '' ||
+      p.name.toLowerCase().includes(search.toLowerCase()) ||
+      p.shortDesc.toLowerCase().includes(search.toLowerCase());
+    return matchCat && matchSearch;
+  }).sort((a, b) => {
+    if (sortBy === 'name') return a.name.localeCompare(b.name);
+    if (sortBy === 'category') return a.category.localeCompare(b.category);
+    return 0;
+  });
+
+  return React.createElement('div', { style: clStyles.page },
+    // Breadcrumb + header
+    React.createElement('div', { style: clStyles.pageHeader },
+      React.createElement('div', { style: clStyles.pageHeaderInner },
+        React.createElement('div', { style: clStyles.breadcrumb },
+          React.createElement('span', { style: clStyles.breadcrumbRoot }, 'BRALARMSEG'),
+          React.createElement('span', { style: clStyles.breadcrumbSep }, '/'),
+          React.createElement('span', { style: clStyles.breadcrumbCurrent }, 'Catálogo')
+        ),
+        React.createElement('h1', { style: clStyles.pageTitle }, 'CATÁLOGO DE PRODUTOS LED'),
+        React.createElement('p', { style: clStyles.pageSubtitle }, 'Soluções completas em iluminação industrial — Highbay, Projetores e Emergência.')
+      )
+    ),
+
+    // Toolbar
+    React.createElement('div', { style: clStyles.toolbar },
+      React.createElement('div', { style: clStyles.toolbarInner },
+        // Search
+        React.createElement('div', { style: clStyles.searchWrap },
+          React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: '#8A8A8A', strokeWidth: 2, style: clStyles.searchIcon },
+            React.createElement('circle', { cx: 11, cy: 11, r: 8 }),
+            React.createElement('line', { x1: 21, y1: 21, x2: 16.65, y2: 16.65 })
+          ),
+          React.createElement('input', {
+            type: 'text', placeholder: 'Buscar produto...', value: search,
+            onChange: e => setSearch(e.target.value), style: clStyles.searchInput
+          })
+        ),
+        // Category tabs
+        React.createElement('div', { style: clStyles.categoryTabs },
+          CATEGORIES.map(cat =>
+            React.createElement('button', {
+              key: cat,
+              style: { ...clStyles.catTab, ...(activeCategory === cat ? clStyles.catTabActive : {}) },
+              onClick: () => setActiveCategory(cat)
+            }, cat)
+          )
+        ),
+        // Right controls
+        React.createElement('div', { style: clStyles.toolbarRight },
+          React.createElement('select', {
+            value: sortBy, onChange: e => setSortBy(e.target.value),
+            style: clStyles.sortSelect
+          },
+            React.createElement('option', { value: 'default' }, 'Ordenar por...'),
+            React.createElement('option', { value: 'name' }, 'Nome A–Z'),
+            React.createElement('option', { value: 'category' }, 'Categoria')
+          ),
+          React.createElement('div', { style: clStyles.viewToggle },
+            React.createElement('button', {
+              style: { ...clStyles.viewBtn, ...(viewMode === 'grid' ? clStyles.viewBtnActive : {}) },
+              onClick: () => setViewMode('grid'), title: 'Grade'
+            },
+              React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+                React.createElement('rect', { x: 3, y: 3, width: 7, height: 7 }),
+                React.createElement('rect', { x: 14, y: 3, width: 7, height: 7 }),
+                React.createElement('rect', { x: 3, y: 14, width: 7, height: 7 }),
+                React.createElement('rect', { x: 14, y: 14, width: 7, height: 7 })
+              )
+            ),
+            React.createElement('button', {
+              style: { ...clStyles.viewBtn, ...(viewMode === 'list' ? clStyles.viewBtnActive : {}) },
+              onClick: () => setViewMode('list'), title: 'Lista'
+            },
+              React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+                React.createElement('line', { x1: 8, y1: 6, x2: 21, y2: 6 }),
+                React.createElement('line', { x1: 8, y1: 12, x2: 21, y2: 12 }),
+                React.createElement('line', { x1: 8, y1: 18, x2: 21, y2: 18 }),
+                React.createElement('line', { x1: 3, y1: 6, x2: 3.01, y2: 6 }),
+                React.createElement('line', { x1: 3, y1: 12, x2: 3.01, y2: 12 }),
+                React.createElement('line', { x1: 3, y1: 18, x2: 3.01, y2: 18 })
+              )
+            )
+          )
+        )
+      )
+    ),
+
+    // Results count
+    React.createElement('div', { style: clStyles.main },
+      React.createElement('div', { style: clStyles.resultsBar },
+        React.createElement('span', { style: clStyles.resultsCount },
+          `${filtered.length} produto${filtered.length !== 1 ? 's' : ''} encontrado${filtered.length !== 1 ? 's' : ''}`
+        ),
+        compareList.length > 0 && React.createElement('span', { style: clStyles.compareHint },
+          `${compareList.length} selecionado${compareList.length > 1 ? 's' : ''} para comparar`
+        )
+      ),
+
+      // Grid or List
+      viewMode === 'grid'
+        ? React.createElement('div', { style: clStyles.grid },
+            filtered.map(p =>
+              React.createElement(CatalogCard, {
+                key: p.id, product: p,
+                inCompare: compareList.includes(p.id),
+                onToggleCompare,
+                onClick: () => onSelectProduct(p)
+              })
+            )
+          )
+        : React.createElement('div', { style: clStyles.list },
+            filtered.map(p =>
+              React.createElement(CatalogListRow, {
+                key: p.id, product: p,
+                inCompare: compareList.includes(p.id),
+                onToggleCompare,
+                onClick: () => onSelectProduct(p)
+              })
+            )
+          )
+    )
+  );
+};
+
+/* ---- Catalog Card (grid view) ---- */
+const CatalogCard = ({ product: p, inCompare, onToggleCompare, onClick }) => {
+  const [hovered, setHovered] = React.useState(false);
+
+  return React.createElement('div', {
+    style: {
+      ...ccStyles.card,
+      boxShadow: hovered ? '0 6px 20px rgba(0,0,0,0.13)' : '0 1px 4px rgba(0,0,0,0.08)',
+      transform: hovered ? 'translateY(-3px)' : 'none',
+    },
+    onMouseEnter: () => setHovered(true),
+    onMouseLeave: () => setHovered(false)
+  },
+    // Compare checkbox
+    React.createElement('div', {
+      style: { ...ccStyles.compareCb, ...(inCompare ? ccStyles.compareCbChecked : {}) },
+      onClick: e => { e.stopPropagation(); onToggleCompare(p.id); },
+      title: inCompare ? 'Remover da comparação' : 'Adicionar à comparação'
+    },
+      inCompare
+        ? React.createElement('svg', { width: 10, height: 10, viewBox: '0 0 24 24', fill: 'none', stroke: '#fff', strokeWidth: 3 },
+            React.createElement('polyline', { points: '20 6 9 17 4 12' })
+          )
+        : React.createElement('svg', { width: 10, height: 10, viewBox: '0 0 24 24', fill: 'none', stroke: '#BABABA', strokeWidth: 2 },
+            React.createElement('polyline', { points: '22 12 18 12 15 21 9 3 6 12 2 12' })
+          )
+    ),
+    // Badge
+    p.badge && React.createElement('div', {
+      style: { ...ccStyles.badge, background: p.badgeColor || '#E35106' }
+    }, p.badge),
+    // Image
+    React.createElement('div', { style: ccStyles.imgWrap, onClick },
+      React.createElement('img', {
+        src: p.imgUrl, alt: p.fullName,
+        style: { ...ccStyles.img, transform: hovered ? 'scale(1.04)' : 'scale(1)' },
+        loading: 'lazy'
+      })
+    ),
+    // Body
+    React.createElement('div', { style: ccStyles.body },
+      React.createElement('div', { style: ccStyles.category }, p.category),
+      React.createElement('div', { style: ccStyles.name, onClick }, p.name),
+      React.createElement('div', { style: ccStyles.chips },
+        Object.entries(p.specs).slice(0, 3).map(([k, v]) =>
+          React.createElement('span', { key: k, style: ccStyles.chip, title: k }, v)
+        )
+      ),
+      React.createElement('p', { style: ccStyles.desc }, p.shortDesc),
+      React.createElement('div', { style: ccStyles.actions },
+        React.createElement('button', { style: ccStyles.detailBtn, onClick }, 'Ver ficha técnica →'),
+        React.createElement('button', {
+          style: ccStyles.contactBtn,
+          onClick: e => e.stopPropagation()
+        }, 'Orçamento')
+      )
+    )
+  );
+};
+
+/* ---- Catalog List Row ---- */
+const CatalogListRow = ({ product: p, inCompare, onToggleCompare, onClick }) => {
+  const [hovered, setHovered] = React.useState(false);
+  return React.createElement('div', {
+    style: { ...lrStyles.row, background: hovered ? '#FAFAFA' : '#fff' },
+    onMouseEnter: () => setHovered(true),
+    onMouseLeave: () => setHovered(false)
+  },
+    React.createElement('input', {
+      type: 'checkbox', checked: inCompare,
+      onChange: () => onToggleCompare(p.id),
+      style: lrStyles.cb,
+      onClick: e => e.stopPropagation()
+    }),
+    React.createElement('div', { style: lrStyles.imgWrap },
+      React.createElement('img', { src: p.imgUrl, alt: p.fullName, style: lrStyles.img, loading: 'lazy' })
+    ),
+    React.createElement('div', { style: lrStyles.info, onClick },
+      React.createElement('div', { style: lrStyles.cat }, p.category),
+      React.createElement('div', { style: lrStyles.name }, p.name),
+      React.createElement('p', { style: lrStyles.desc }, p.shortDesc)
+    ),
+    React.createElement('div', { style: lrStyles.specs },
+      Object.entries(p.specs).slice(0, 4).map(([k, v]) =>
+        React.createElement('div', { key: k, style: lrStyles.specRow },
+          React.createElement('span', { style: lrStyles.specKey }, k),
+          React.createElement('span', { style: lrStyles.specVal }, v)
+        )
+      )
+    ),
+    React.createElement('div', { style: lrStyles.actions },
+      p.badge && React.createElement('div', {
+        style: { ...lrStyles.badge, background: p.badgeColor || '#E35106' }
+      }, p.badge),
+      React.createElement('button', { style: lrStyles.detailBtn, onClick }, 'Ficha técnica'),
+      React.createElement('button', { style: lrStyles.contactBtn }, 'Orçamento')
+    )
+  );
+};
+
+/* ============================================================
+   PAGE 2 — PRODUCT DETAIL
+   ============================================================ */
+
+const ProductDetailPage = ({ product: p, onBack, onCompare, inCompare }) => {
+  const [activeTab, setActiveTab] = React.useState('specs');
+
+  const specsArr = Object.entries(p.specs);
+  const half = Math.ceil(specsArr.length / 2);
+
+  return React.createElement('div', { style: pdStyles.page },
+    // Breadcrumb bar
+    React.createElement('div', { style: pdStyles.breadBar },
+      React.createElement('div', { style: pdStyles.breadBarInner },
+        React.createElement('button', { style: pdStyles.backBtn, onClick: onBack },
+          React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+            React.createElement('polyline', { points: '15 18 9 12 15 6' })
+          ),
+          'Voltar ao catálogo'
+        ),
+        React.createElement('div', { style: pdStyles.breadCrumb },
+          React.createElement('span', { style: pdStyles.breadItem }, 'Catálogo'),
+          React.createElement('span', { style: pdStyles.breadSep }, '/'),
+          React.createElement('span', { style: pdStyles.breadItem }, p.category),
+          React.createElement('span', { style: pdStyles.breadSep }, '/'),
+          React.createElement('span', { style: { ...pdStyles.breadItem, color: '#111' } }, p.name)
+        )
+      )
+    ),
+
+    // Main two-column layout
+    React.createElement('div', { style: pdStyles.main },
+      // Left — image + certifications
+      React.createElement('div', { style: pdStyles.imageCol },
+        React.createElement('div', { style: pdStyles.imgWrap },
+          React.createElement('img', { src: p.imgUrl, alt: p.fullName, style: pdStyles.img })
+        ),
+        // Certs
+        React.createElement('div', { style: pdStyles.certsWrap },
+          React.createElement('div', { style: pdStyles.certsLabel }, 'Certificações'),
+          React.createElement('div', { style: pdStyles.certsRow },
+            p.certifications.map(c =>
+              React.createElement('div', { key: c, style: pdStyles.certBadge }, c)
+            )
+          )
+        ),
+        // Compare toggle
+        React.createElement('button', {
+          style: { ...pdStyles.compareToggle, ...(inCompare ? pdStyles.compareToggleActive : {}) },
+          onClick: onCompare
+        },
+          React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+            React.createElement('polyline', { points: '22 12 18 12 15 21 9 3 6 12 2 12' })
+          ),
+          inCompare ? 'Remover da comparação' : 'Adicionar à comparação'
+        )
+      ),
+
+      // Right — info
+      React.createElement('div', { style: pdStyles.infoCol },
+        p.badge && React.createElement('div', {
+          style: { ...pdStyles.badge, background: p.badgeColor || '#E35106' }
+        }, p.badge),
+        React.createElement('div', { style: pdStyles.category }, p.category),
+        React.createElement('h1', { style: pdStyles.title }, p.fullName.toUpperCase()),
+        React.createElement('p', { style: pdStyles.desc }, p.longDesc),
+
+        // Quick specs row
+        React.createElement('div', { style: pdStyles.quickSpecs },
+          Object.entries(p.specs).slice(0, 4).map(([k, v]) =>
+            React.createElement('div', { key: k, style: pdStyles.quickSpec },
+              React.createElement('div', { style: pdStyles.quickSpecVal }, v),
+              React.createElement('div', { style: pdStyles.quickSpecKey }, k)
+            )
+          )
+        ),
+
+        // Applications
+        React.createElement('div', { style: pdStyles.appSection },
+          React.createElement('div', { style: pdStyles.appLabel }, 'Aplicações'),
+          React.createElement('div', { style: pdStyles.appChips },
+            p.applications.map(a =>
+              React.createElement('span', { key: a, style: pdStyles.appChip }, a)
+            )
+          )
+        ),
+
+        // CTA buttons
+        React.createElement('div', { style: pdStyles.ctas },
+          React.createElement('button', { style: pdStyles.ctaPrimary }, 'SOLICITAR ORÇAMENTO'),
+          React.createElement('button', { style: pdStyles.ctaSecondary }, 'BAIXAR DATASHEET')
+        )
+      )
+    ),
+
+    // Tabs section
+    React.createElement('div', { style: pdStyles.tabsSection },
+      React.createElement('div', { style: pdStyles.tabsInner },
+        React.createElement('div', { style: pdStyles.tabs },
+          [['specs','Especificações Técnicas'], ['warranty','Garantia & Suporte'], ['downloads','Downloads']].map(([id, label]) =>
+            React.createElement('button', {
+              key: id,
+              style: { ...pdStyles.tab, ...(activeTab === id ? pdStyles.tabActive : {}) },
+              onClick: () => setActiveTab(id)
+            }, label)
+          )
+        ),
+
+        activeTab === 'specs' && React.createElement('div', { style: pdStyles.specsGrid },
+          React.createElement('table', { style: pdStyles.specTable },
+            React.createElement('tbody', null,
+              specsArr.slice(0, half).map(([k, v]) =>
+                React.createElement('tr', { key: k, style: pdStyles.specRow },
+                  React.createElement('td', { style: pdStyles.specKey }, k),
+                  React.createElement('td', { style: pdStyles.specVal }, v)
+                )
+              )
+            )
+          ),
+          React.createElement('table', { style: pdStyles.specTable },
+            React.createElement('tbody', null,
+              specsArr.slice(half).map(([k, v]) =>
+                React.createElement('tr', { key: k, style: pdStyles.specRow },
+                  React.createElement('td', { style: pdStyles.specKey }, k),
+                  React.createElement('td', { style: pdStyles.specVal }, v)
+                )
+              )
+            )
+          )
+        ),
+
+        activeTab === 'warranty' && React.createElement('div', { style: { padding: '28px 0' } },
+          React.createElement('div', { style: { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 20 } },
+            [
+              ['Garantia do produto', p.specs['Garantia'] || '2 anos', 'Cobre defeitos de fabricação e falhas de componentes em condições normais de uso.'],
+              ['Suporte técnico', 'Pós-venda', 'Equipe especializada disponível para assistência técnica e orientação de instalação.'],
+              ['Reposição de peça', 'Conforme garantia', 'Peças e componentes originais disponíveis para reposição durante o período de garantia.']
+            ].map(([title, val, desc]) =>
+              React.createElement('div', { key: title, style: { padding: 20, background: '#F5F5F5', borderRadius: 3, border: '1px solid #EBEBEB' } },
+                React.createElement('div', { style: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 28, fontWeight: 800, color: '#E35106', lineHeight: 1, marginBottom: 6 } }, val),
+                React.createElement('div', { style: { fontSize: 13, fontWeight: 600, color: '#111', marginBottom: 6 } }, title),
+                React.createElement('p', { style: { fontSize: 13, color: '#5A5A5A', lineHeight: 1.6 } }, desc)
+              )
+            )
+          )
+        ),
+
+        activeTab === 'downloads' && React.createElement('div', { style: { padding: '28px 0', display: 'flex', flexDirection: 'column', gap: 10 } },
+          [
+            ['Datasheet técnico — ' + p.name, 'PDF', '284 KB'],
+            ['Manual de instalação', 'PDF', '1.2 MB'],
+            ['Certificado INMETRO', 'PDF', '156 KB'],
+            ['Fotometria IES/LDT', 'IES', '48 KB'],
+          ].map(([name, type, size]) =>
+            React.createElement('div', { key: name, style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: '#fff', border: '1px solid #EBEBEB', borderRadius: 3 } },
+              React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: 10 } },
+                React.createElement('div', { style: { background: '#E35106', color: '#fff', fontFamily: "'JetBrains Mono',monospace", fontSize: 9, fontWeight: 700, padding: '3px 5px', borderRadius: 2 } }, type),
+                React.createElement('span', { style: { fontSize: 14, color: '#111' } }, name)
+              ),
+              React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: 12 } },
+                React.createElement('span', { style: { fontSize: 12, color: '#8A8A8A', fontFamily: "'JetBrains Mono',monospace" } }, size),
+                React.createElement('button', { style: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', background: '#F0F0F0', color: '#3A3A3A', border: 'none', padding: '6px 12px', borderRadius: 3, cursor: 'pointer' } }, 'Baixar')
+              )
+            )
+          )
+        )
+      )
+    )
+  );
+};
+
+/* ============================================================
+   PAGE 3 — COMPARISON TABLE
+   ============================================================ */
+
+const ComparisonPage = ({ productIds, allProducts, onRemove, onBack }) => {
+  const products = allProducts.filter(p => productIds.includes(p.id));
+  if (products.length === 0) return null;
+
+  // Union of all spec keys
+  const allKeys = [...new Set(products.flatMap(p => Object.keys(p.specs)))];
+
+  return React.createElement('div', { style: cpStyles.page },
+    React.createElement('div', { style: cpStyles.header },
+      React.createElement('div', { style: cpStyles.headerInner },
+        React.createElement('button', { style: cpStyles.backBtn, onClick: onBack },
+          React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2 },
+            React.createElement('polyline', { points: '15 18 9 12 15 6' })
+          ),
+          'Voltar ao catálogo'
+        ),
+        React.createElement('div', null,
+          React.createElement('div', { style: { fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#E35106', marginBottom: 4 } }, 'Comparação'),
+          React.createElement('h1', { style: cpStyles.title }, `COMPARAR ${products.length} PRODUTOS`)
+        )
+      )
+    ),
+
+    React.createElement('div', { style: cpStyles.tableWrap },
+      React.createElement('table', { style: cpStyles.table },
+        // Header row — product names
+        React.createElement('thead', null,
+          React.createElement('tr', null,
+            React.createElement('th', { style: cpStyles.rowHeader }, ''),
+            products.map(p =>
+              React.createElement('th', { key: p.id, style: cpStyles.colHeader },
+                React.createElement('div', { style: cpStyles.productCol },
+                  React.createElement('div', { style: cpStyles.productImgWrap },
+                    React.createElement('img', { src: p.imgUrl, alt: p.name, style: cpStyles.productImg })
+                  ),
+                  React.createElement('div', { style: cpStyles.productCat }, p.category),
+                  React.createElement('div', { style: cpStyles.productName }, p.name),
+                  React.createElement('button', {
+                    style: cpStyles.removeBtn,
+                    onClick: () => onRemove(p.id)
+                  }, '× Remover')
+                )
+              )
+            )
+          )
+        ),
+
+        // Spec rows
+        React.createElement('tbody', null,
+          allKeys.map((key, i) =>
+            React.createElement('tr', { key, style: { background: i % 2 === 0 ? '#fff' : '#FAFAFA' } },
+              React.createElement('td', { style: cpStyles.rowLabel }, key),
+              products.map(p => {
+                const val = p.specs[key];
+                // Highlight best value for numeric specs
+                const allVals = products.map(pp => pp.specs[key]).filter(Boolean);
+                return React.createElement('td', { key: p.id, style: cpStyles.cell },
+                  val
+                    ? React.createElement('span', {
+                        style: {
+                          fontFamily: "'JetBrains Mono',monospace",
+                          fontSize: 13, color: '#111',
+                          fontWeight: val && allVals.length > 1 ? 500 : 400
+                        }
+                      }, val)
+                    : React.createElement('span', { style: { color: '#BABABA', fontSize: 13 } }, '—')
+                );
+              })
+            )
+          ),
+          // CTA row
+          React.createElement('tr', { style: { background: '#F5F5F5' } },
+            React.createElement('td', { style: { ...cpStyles.rowLabel, border: 'none' } }),
+            products.map(p =>
+              React.createElement('td', { key: p.id, style: { ...cpStyles.cell, border: 'none', paddingTop: 16, paddingBottom: 16 } },
+                React.createElement('button', { style: cpStyles.ctaBtn }, 'Solicitar Orçamento')
+              )
+            )
+          )
+        )
+      )
+    )
+  );
+};
+
+/* ============================================================
+   STYLES (page-level)
+   ============================================================ */
+
+const clStyles = {
+  page: { minHeight: '100vh', background: '#F5F5F5' },
+  pageHeader: { background: '#0A1628', padding: '36px 0 28px' },
+  pageHeaderInner: { maxWidth: 1280, margin: '0 auto', padding: '0 24px' },
+  breadcrumb: { display: 'flex', alignItems: 'center', gap: 6, marginBottom: 10 },
+  breadcrumbRoot: { fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#5A7AA0' },
+  breadcrumbSep: { color: '#3A5070', fontSize: 11 },
+  breadcrumbCurrent: { fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#A0B4CC' },
+  pageTitle: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 44, fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', marginBottom: 8 },
+  pageSubtitle: { fontSize: 15, color: '#5A7AA0', fontWeight: 300 },
+  toolbar: { background: '#fff', borderBottom: '1px solid #EBEBEB', position: 'sticky', top: 60, zIndex: 90 },
+  toolbarInner: { maxWidth: 1280, margin: '0 auto', padding: '10px 24px', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' },
+  searchWrap: { position: 'relative', flexShrink: 0 },
+  searchIcon: { position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' },
+  searchInput: { fontFamily: "'Barlow',sans-serif", fontSize: 13, color: '#111', background: '#F5F5F5', border: '1px solid #DCDCDC', borderRadius: 3, padding: '6px 10px 6px 30px', outline: 'none', width: 180, transition: 'border-color 150ms' },
+  categoryTabs: { display: 'flex', gap: 4, flex: 1, flexWrap: 'wrap' },
+  catTab: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', padding: '5px 12px', borderRadius: 2, border: '1px solid #DCDCDC', background: '#fff', color: '#5A5A5A', cursor: 'pointer', transition: 'all 100ms', whiteSpace: 'nowrap' },
+  catTabActive: { background: '#E35106', color: '#fff', borderColor: '#E35106' },
+  toolbarRight: { display: 'flex', alignItems: 'center', gap: 8, marginLeft: 'auto' },
+  sortSelect: { fontFamily: "'Barlow',sans-serif", fontSize: 12, color: '#3A3A3A', background: '#fff', border: '1px solid #DCDCDC', borderRadius: 3, padding: '5px 10px', outline: 'none', cursor: 'pointer' },
+  viewToggle: { display: 'flex', border: '1px solid #DCDCDC', borderRadius: 3, overflow: 'hidden' },
+  viewBtn: { background: '#fff', border: 'none', padding: '6px 9px', cursor: 'pointer', color: '#7A7A7A', display: 'flex', alignItems: 'center', transition: 'background 100ms' },
+  viewBtnActive: { background: '#F0F0F0', color: '#111' },
+  main: { maxWidth: 1280, margin: '0 auto', padding: '20px 24px 60px' },
+  resultsBar: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 },
+  resultsCount: { fontSize: 12, color: '#7A7A7A', fontWeight: 500 },
+  compareHint: { fontSize: 12, color: '#E35106', fontWeight: 600 },
+  grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: 16 },
+  list: { display: 'flex', flexDirection: 'column', gap: 8 },
+};
+
+const ccStyles = {
+  card: { background: '#fff', border: '1px solid #DCDCDC', borderRadius: 4, overflow: 'hidden', transition: 'box-shadow 200ms, transform 200ms', position: 'relative', display: 'flex', flexDirection: 'column' },
+  compareCb: { position: 'absolute', top: 10, left: 10, width: 22, height: 22, border: '2px solid #DCDCDC', borderRadius: 3, background: '#fff', zIndex: 2, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 150ms' },
+  compareCbChecked: { background: '#003DA5', borderColor: '#003DA5' },
+  badge: { position: 'absolute', top: 10, right: 10, zIndex: 2, color: '#fff', fontFamily: "'Barlow Condensed',monospace", fontSize: 10, fontWeight: 700, letterSpacing: '0.06em', padding: '2px 7px', borderRadius: 2 },
+  imgWrap: { height: 150, background: '#FAFAFA', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', borderBottom: '1px solid #F0F0F0' },
+  img: { width: '100%', height: '100%', objectFit: 'contain', padding: 16, transition: 'transform 300ms ease-out' },
+  body: { padding: 14, display: 'flex', flexDirection: 'column', gap: 6, flex: 1 },
+  category: { fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E35106' },
+  name: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 17, fontWeight: 700, color: '#111', lineHeight: 1.2, cursor: 'pointer' },
+  chips: { display: 'flex', gap: 4, flexWrap: 'wrap' },
+  chip: { fontFamily: "'JetBrains Mono',monospace", fontSize: 10, background: '#F0F0F0', color: '#3A3A3A', padding: '2px 6px', borderRadius: 2 },
+  desc: { fontSize: 12, color: '#5A5A5A', lineHeight: 1.5, flex: 1 },
+  actions: { display: 'flex', gap: 6, alignItems: 'center', marginTop: 4, borderTop: '1px solid #F0F0F0', paddingTop: 10 },
+  detailBtn: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', background: 'none', border: 'none', color: '#E35106', cursor: 'pointer', padding: 0, flex: 1, textAlign: 'left' },
+  contactBtn: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', background: '#0A1628', color: '#fff', border: 'none', padding: '5px 10px', borderRadius: 2, cursor: 'pointer', whiteSpace: 'nowrap' },
+};
+
+const lrStyles = {
+  row: { display: 'flex', alignItems: 'center', gap: 16, padding: '12px 16px', background: '#fff', border: '1px solid #EBEBEB', borderRadius: 3, transition: 'background 100ms' },
+  cb: { width: 16, height: 16, accentColor: '#003DA5', flexShrink: 0, cursor: 'pointer' },
+  imgWrap: { width: 80, height: 60, background: '#FAFAFA', borderRadius: 2, overflow: 'hidden', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' },
+  img: { width: '100%', height: '100%', objectFit: 'contain', padding: 6 },
+  info: { flex: 2, cursor: 'pointer', minWidth: 0 },
+  cat: { fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#E35106', marginBottom: 2 },
+  name: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 16, fontWeight: 700, color: '#111' },
+  desc: { fontSize: 12, color: '#5A5A5A', lineHeight: 1.4, marginTop: 2 },
+  specs: { flex: 2, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px 16px' },
+  specRow: { display: 'flex', gap: 4, alignItems: 'baseline' },
+  specKey: { fontSize: 10, color: '#7A7A7A', whiteSpace: 'nowrap' },
+  specVal: { fontFamily: "'JetBrains Mono',monospace", fontSize: 11, color: '#111', fontWeight: 500 },
+  actions: { display: 'flex', flexDirection: 'column', gap: 5, alignItems: 'flex-end', flexShrink: 0 },
+  badge: { color: '#fff', fontFamily: "'Barlow Condensed',sans-serif", fontSize: 10, fontWeight: 700, padding: '2px 6px', borderRadius: 2, letterSpacing: '0.04em' },
+  detailBtn: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', background: '#F0F0F0', color: '#3A3A3A', border: 'none', padding: '5px 10px', borderRadius: 2, cursor: 'pointer', whiteSpace: 'nowrap' },
+  contactBtn: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', background: '#E35106', color: '#fff', border: 'none', padding: '5px 10px', borderRadius: 2, cursor: 'pointer', whiteSpace: 'nowrap' },
+};
+
+const pdStyles = {
+  page: { minHeight: '100vh', background: '#F5F5F5' },
+  breadBar: { background: '#fff', borderBottom: '1px solid #EBEBEB' },
+  breadBarInner: { maxWidth: 1280, margin: '0 auto', padding: '10px 24px', display: 'flex', alignItems: 'center', gap: 20 },
+  backBtn: { fontFamily: "'Barlow',sans-serif", fontSize: 12, fontWeight: 600, color: '#5A5A5A', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, padding: 0, letterSpacing: '0.02em' },
+  breadCrumb: { display: 'flex', alignItems: 'center', gap: 6 },
+  breadItem: { fontSize: 12, color: '#7A7A7A' },
+  breadSep: { fontSize: 12, color: '#DCDCDC' },
+  main: { maxWidth: 1280, margin: '0 auto', padding: '32px 24px', display: 'grid', gridTemplateColumns: '380px 1fr', gap: 40 },
+  imageCol: { display: 'flex', flexDirection: 'column', gap: 16 },
+  imgWrap: { background: '#fff', border: '1px solid #EBEBEB', borderRadius: 4, padding: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', height: 320 },
+  img: { maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' },
+  certsWrap: { background: '#fff', border: '1px solid #EBEBEB', borderRadius: 3, padding: 16 },
+  certsLabel: { fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#7A7A7A', marginBottom: 8 },
+  certsRow: { display: 'flex', gap: 6, flexWrap: 'wrap' },
+  certBadge: { fontFamily: "'JetBrains Mono',monospace", fontSize: 10, fontWeight: 700, background: '#F0F0F0', color: '#3A3A3A', padding: '3px 8px', borderRadius: 2, letterSpacing: '0.04em' },
+  compareToggle: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', background: '#F0F0F0', color: '#5A5A5A', border: '1px solid #DCDCDC', padding: '8px 14px', borderRadius: 3, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, transition: 'all 150ms', width: '100%', justifyContent: 'center' },
+  compareToggleActive: { background: '#0A1628', color: '#fff', borderColor: '#0A1628' },
+  infoCol: { display: 'flex', flexDirection: 'column', gap: 0 },
+  badge: { display: 'inline-block', color: '#fff', fontFamily: "'Barlow Condensed',sans-serif", fontSize: 11, fontWeight: 700, padding: '3px 8px', borderRadius: 2, marginBottom: 10, letterSpacing: '0.04em' },
+  category: { fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#E35106', marginBottom: 6 },
+  title: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 40, fontWeight: 800, color: '#111', lineHeight: 1.05, letterSpacing: '-0.01em', marginBottom: 16 },
+  desc: { fontSize: 15, color: '#4A4A4A', lineHeight: 1.7, marginBottom: 24 },
+  quickSpecs: { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: '#EBEBEB', border: '1px solid #EBEBEB', borderRadius: 3, overflow: 'hidden', marginBottom: 20 },
+  quickSpec: { background: '#fff', padding: '12px 14px', textAlign: 'center' },
+  quickSpecVal: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 22, fontWeight: 800, color: '#111', lineHeight: 1 },
+  quickSpecKey: { fontSize: 10, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#7A7A7A', marginTop: 4 },
+  appSection: { marginBottom: 24 },
+  appLabel: { fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#7A7A7A', marginBottom: 8 },
+  appChips: { display: 'flex', gap: 6, flexWrap: 'wrap' },
+  appChip: { fontSize: 12, fontWeight: 500, background: '#F0F0F0', color: '#3A3A3A', padding: '4px 10px', borderRadius: 3, border: '1px solid #EBEBEB' },
+  ctas: { display: 'flex', gap: 10 },
+  ctaPrimary: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 14, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', background: '#E35106', color: '#fff', border: 'none', padding: '13px 24px', borderRadius: 3, cursor: 'pointer', flex: 1 },
+  ctaSecondary: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 14, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', background: 'transparent', color: '#003DA5', border: '2px solid #003DA5', padding: '11px 24px', borderRadius: 3, cursor: 'pointer' },
+  tabsSection: { background: '#fff', borderTop: '1px solid #EBEBEB', marginTop: 8 },
+  tabsInner: { maxWidth: 1280, margin: '0 auto', padding: '0 24px 40px' },
+  tabs: { display: 'flex', borderBottom: '1px solid #EBEBEB', marginBottom: 0 },
+  tab: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', padding: '14px 20px', background: 'none', border: 'none', borderBottom: '3px solid transparent', cursor: 'pointer', color: '#5A5A5A', transition: 'color 150ms, border-color 150ms', marginBottom: -1 },
+  tabActive: { color: '#E35106', borderBottomColor: '#E35106' },
+  specsGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, paddingTop: 20 },
+  specTable: { width: '100%', borderCollapse: 'collapse' },
+  specRow: { borderBottom: '1px solid #F0F0F0' },
+  specKey: { padding: '9px 12px 9px 0', fontSize: 12, color: '#7A7A7A', fontWeight: 500, width: '45%', verticalAlign: 'middle' },
+  specVal: { padding: '9px 12px', fontFamily: "'JetBrains Mono',monospace", fontSize: 13, color: '#111', fontWeight: 500, verticalAlign: 'middle' },
+};
+
+const cpStyles = {
+  page: { minHeight: '100vh', background: '#F5F5F5' },
+  header: { background: '#0A1628', padding: '28px 0' },
+  headerInner: { maxWidth: 1280, margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', gap: 24 },
+  backBtn: { fontFamily: "'Barlow',sans-serif", fontSize: 12, fontWeight: 600, color: '#A0B4CC', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4, padding: '6px 10px', borderRadius: 3, border: '1px solid rgba(255,255,255,0.12)', transition: 'background 150ms' },
+  title: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 36, fontWeight: 800, color: '#fff', letterSpacing: '-0.01em', margin: 0 },
+  tableWrap: { maxWidth: 1280, margin: '0 auto', padding: '24px 24px 60px', overflowX: 'auto' },
+  table: { width: '100%', borderCollapse: 'collapse', background: '#fff', borderRadius: 4, overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' },
+  rowHeader: { width: 180, background: '#F5F5F5', padding: '12px 16px', borderBottom: '2px solid #111', textAlign: 'left' },
+  colHeader: { background: '#fff', padding: 0, borderBottom: '2px solid #111', verticalAlign: 'top', minWidth: 200 },
+  productCol: { padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 4 },
+  productImgWrap: { width: '100%', height: 100, background: '#FAFAFA', borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 8, overflow: 'hidden' },
+  productImg: { maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', padding: 8 },
+  productCat: { fontSize: 9, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#E35106' },
+  productName: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 16, fontWeight: 700, color: '#111', lineHeight: 1.2 },
+  removeBtn: { fontFamily: "'Barlow',sans-serif", fontSize: 11, color: '#8A8A8A', background: 'none', border: 'none', cursor: 'pointer', padding: 0, textAlign: 'left', marginTop: 4, textDecoration: 'underline' },
+  rowLabel: { padding: '9px 16px', fontSize: 12, color: '#5A5A5A', fontWeight: 500, background: '#F5F5F5', borderBottom: '1px solid #EBEBEB', whiteSpace: 'nowrap', borderRight: '1px solid #EBEBEB' },
+  cell: { padding: '9px 20px', borderBottom: '1px solid #EBEBEB', verticalAlign: 'middle', textAlign: 'left' },
+  ctaBtn: { fontFamily: "'Barlow Condensed',sans-serif", fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', background: '#E35106', color: '#fff', border: 'none', padding: '9px 18px', borderRadius: 3, cursor: 'pointer', width: '100%' },
+};
+
+/* ============================================================
+   ROOT APP
+   ============================================================ */
+
+const CatalogApp = () => {
+  const [view, setView] = React.useState('catalog'); // catalog | detail | compare
+  const [selectedProduct, setSelectedProduct] = React.useState(null);
+  const [compareList, setCompareList] = React.useState([]);
+
+  const toggleCompare = (id) => {
+    setCompareList(prev =>
+      prev.includes(id)
+        ? prev.filter(x => x !== id)
+        : prev.length < 4 ? [...prev, id] : prev
+    );
+  };
+
+  const navigate = (dest) => {
+    setView(dest);
+    window.scrollTo({ top: 0 });
+  };
+
+  const selectProduct = (p) => {
+    setSelectedProduct(p);
+    setView('detail');
+    window.scrollTo({ top: 0 });
+  };
+
+  return React.createElement('div', null,
+    React.createElement(CatalogNav, {
+      page: view,
+      onNavigate: navigate,
+      compareCount: compareList.length
+    }),
+    React.createElement('div', { className: 'page-enter', key: view },
+      view === 'catalog' && React.createElement(CatalogPage, {
+        onSelectProduct: selectProduct,
+        compareList,
+        onToggleCompare: toggleCompare
+      }),
+      view === 'detail' && selectedProduct && React.createElement(ProductDetailPage, {
+        product: selectedProduct,
+        onBack: () => navigate('catalog'),
+        onCompare: () => toggleCompare(selectedProduct.id),
+        inCompare: compareList.includes(selectedProduct.id)
+      }),
+      view === 'compare' && React.createElement(ComparisonPage, {
+        productIds: compareList,
+        allProducts: PRODUCTS,
+        onRemove: (id) => setCompareList(prev => prev.filter(x => x !== id)),
+        onBack: () => navigate('catalog')
+      })
+    )
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(CatalogApp));
+</script>
+</body>
+</html>
