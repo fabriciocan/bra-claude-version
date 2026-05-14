@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -12,56 +12,56 @@ const settings = await getSiteSettings();
 const applications = [
   {
     title: 'Galpões Industriais',
-    img: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&q=80',
+    img: '/images/applications/galpoes-industriais.jpg.jpeg',
     desc: 'Luminárias Highbay de alta eficiência para pé-direito de 5 a 20 metros. Iluminação uniforme que aumenta a produtividade e reduz acidentes.',
     products: ['HIGHBAY MAGNA', 'HIGHBAY INDUSTRIAL', 'UFO ELITE'],
     specs: 'IP66 | 140–160 lm/W | 50.000h',
   },
   {
     title: 'Frigoríficos e Câmaras Frias',
-    img: 'https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?w=1200&q=80',
+    img: '/images/applications/frigorifico.jpg.jpeg',
     desc: 'Produtos com IP65 e resistência a variações extremas de temperatura (-30°C a +50°C), especialmente indicados para ambientes frigoríficos.',
     products: ['HIGHBAY INDUSTRIAL'],
     specs: 'IP65 | Temp. -30°C a +50°C | 50.000h',
   },
   {
     title: 'Centros Logísticos',
-    img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80',
+    img: '/images/applications/centro-logistico.jpg.jpeg',
     desc: 'Soluções de iluminação para corredores, docas e áreas de triagem. Alta uniformidade e eficiência para operações 24/7.',
     products: ['HIGHBAY MAGNA', 'HIGHBAY CLASSIC', 'UFO LUXI'],
     specs: 'IP66 | Operação 24/7 | CRI > 80',
   },
   {
     title: 'Estacionamentos',
-    img: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=1200&q=80',
+    img: '/images/applications/estacionamento.jpg.jpeg',
     desc: 'Projetores UFO e Highbay para estacionamentos cobertos e externos. Iluminação que aumenta a segurança e reduz custos operacionais.',
     products: ['UFO LUXI', 'UFO ELITE', 'PROJETOR VEGAS'],
     specs: 'IP65–IP66 | Externo/Interno | 50.000h',
   },
   {
     title: 'Quadras Esportivas',
-    img: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1200&q=80',
+    img: '/images/applications/quadra-esportiva.jpg.jpeg',
     desc: 'Projetores com ângulo ajustável e alta uniformidade lumínica para quadras poliesportivas, cobertas e ao ar livre.',
     products: ['PROJETOR SPORT', 'UFO ELITE'],
     specs: 'IP66 | Ângulo ajustável | Anti-ofuscamento',
   },
   {
     title: 'Portos e Aeroportos',
-    img: 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1200&q=80',
+    img: '/images/applications/estacionamento.jpg.jpeg',
     desc: 'Soluções de iluminação para pátios, pistas e áreas externas de grande extensão. Projetores de alta potência e IP66.',
     products: ['PROJETOR VEGAS', 'PROJETOR SPORT', 'FOX IR'],
     specs: 'IP66 | Alta potência | CFTV-ready',
   },
   {
     title: 'Supermercados e Varejo',
-    img: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=1200&q=80',
+    img: '/images/applications/armazem.jpg.jpeg',
     desc: 'Iluminação de emergência e luminárias LED para ambientes comerciais. Conformidade com AVCB e normas de bombeiros.',
     products: ['LUMO EMERGÊNCIA', 'UFO LUXI'],
     specs: 'IP20 | Emergência 3h | ABNT NBR 10898',
   },
   {
     title: 'Torres Solares e Off-grid',
-    img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=80',
+    img: '/images/applications/galpoes-industriais.jpg.jpeg',
     desc: 'O único projetor 24Vdc do portfólio, compatível com sistemas solares e off-grid. Solução completa para áreas remotas.',
     products: ['FAROS24'],
     specs: '24Vdc | IP66 | Compatível solar',
@@ -71,7 +71,7 @@ const applications = [
 
 <BaseLayout
   title="Aplicações — Ambientes e Segmentos"
-  description="BRALARMSEG atende galpões industriais, frigoríficos, centros logísticos, estacionamentos, quadras esportivas, portos e muito mais."
+  description="BRATECH atende galpões industriais, frigoríficos, centros logísticos, estacionamentos, quadras esportivas, portos e muito mais."
 >
   <Header currentPage="aplicacoes" />
 
@@ -79,7 +79,7 @@ const applications = [
     <div class="page-header">
       <div class="container">
         <nav class="breadcrumb" aria-label="Navegação estrutural">
-          <a href="/" class="breadcrumb__item">BRALARMSEG</a>
+          <a href="/" class="breadcrumb__item">BRATECH</a>
           <span class="breadcrumb__sep">/</span>
           <span class="breadcrumb__item breadcrumb__item--current">Aplicações</span>
         </nav>

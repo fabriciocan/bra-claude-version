@@ -34,6 +34,22 @@ export default defineType({
           { title: 'Projetor UFO', value: 'Projetor UFO' },
           { title: 'Projetor', value: 'Projetor' },
           { title: 'Emergência', value: 'Emergência' },
+          { title: 'Uso Externo', value: 'Uso Externo' },
+          { title: 'Uso Interno', value: 'Uso Interno' },
+          { title: 'Sinalização', value: 'Sinalização' },
+        ],
+        layout: 'radio',
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'productLine',
+      title: 'Linha de Produto',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'LED', value: 'led' },
+          { title: 'Emergência', value: 'emergencia' },
         ],
         layout: 'radio',
       },
@@ -116,6 +132,25 @@ export default defineType({
       type: 'array',
       of: [{ type: 'string' }],
       description: 'Ex: INMETRO, IP66, CE, RoHS',
+    }),
+    defineField({
+      name: 'downloads',
+      title: 'Downloads',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'download',
+          fields: [
+            { name: 'name', title: 'Nome', type: 'string' },
+            { name: 'type', title: 'Tipo', type: 'string', initialValue: 'PDF' },
+            { name: 'url', title: 'URL', type: 'url' },
+          ],
+          preview: {
+            select: { title: 'name', subtitle: 'url' },
+          },
+        },
+      ],
     }),
     defineField({
       name: 'featured',

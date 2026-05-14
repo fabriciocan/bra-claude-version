@@ -1,8 +1,8 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getProductBySlug, getProducts, getSiteSettings } from '../../lib/queries';
+import { getProductBySlug, getSiteSettings } from '../../lib/queries';
 
 const { slug } = Astro.params;
 if (!slug) return Astro.redirect('/produtos');
@@ -18,6 +18,15 @@ const half = Math.ceil(product.specs.length / 2);
 const specsFirst = product.specs.slice(0, half);
 const specsSecond = product.specs.slice(half);
 const garantia = product.specs.find(s => s.key === 'Garantia')?.value || '2 anos';
+const simulatorUrl = `/produtos?linha=${product.productLine}&simular=ia&produto=${encodeURIComponent(product.slug)}`;
+const downloads = product.downloads?.length
+  ? product.downloads
+  : [
+      { name: `Datasheet técnico — ${product.name}`, type: 'PDF', url: '' },
+      { name: 'Manual de instalação', type: 'PDF', url: '' },
+      { name: 'Certificado INMETRO', type: 'PDF', url: '' },
+      { name: 'Fotometria IES/LDT', type: 'IES', url: '' },
+    ];
 ---
 
 <BaseLayout
@@ -37,7 +46,7 @@ const garantia = product.specs.find(s => s.key === 'Garantia')?.value || '2 anos
           Voltar ao catálogo
         </a>
         <nav class="breadcrumb" aria-label="Navegação estrutural">
-          <a href="/" class="breadcrumb__item">BRALARMSEG</a>
+          <a href="/" class="breadcrumb__item">BRATECH</a>
           <span class="breadcrumb__sep">/</span>
           <a href="/produtos" class="breadcrumb__item">Catálogo</a>
           <span class="breadcrumb__sep">/</span>
@@ -76,19 +85,16 @@ const garantia = product.specs.find(s => s.key === 'Garantia')?.value || '2 anos
             </div>
           )}
 
-          <!-- Compare button (Alpine) -->
-          <div x-data="compareBtn()" x-init="init()">
-            <button
-              :class="isCompared ? 'btn btn-dark' : 'btn btn-ghost'"
-              style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px"
-              @click="toggle()"
-            >
+          <a
+            href={simulatorUrl}
+            class="btn btn-dark"
+            style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px"
+          >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
-              <span x-text="isCompared ? 'Remover da comparação' : 'Adicionar à comparação'"></span>
-            </button>
-          </div>
+              SIMULAR COM IA
+          </a>
         </div>
 
         <!-- Right col: info -->
@@ -223,20 +229,18 @@ const garantia = product.specs.find(s => s.key === 'Garantia')?.value || '2 anos
 
             <!-- Downloads tab -->
             <div x-show="activeTab === 'downloads'" style="padding:28px 0;display:flex;flex-direction:column;gap:10px">
-              {[
-                [`Datasheet técnico — ${product.name}`, 'PDF', '284 KB'],
-                ['Manual de instalação', 'PDF', '1,2 MB'],
-                ['Certificado INMETRO', 'PDF', '156 KB'],
-                ['Fotometria IES/LDT', 'IES', '48 KB'],
-              ].map(([name, type, size]) => (
+              {downloads.map((download) => (
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#fff;border:1px solid #EBEBEB;border-radius:3px">
                   <div style="display:flex;align-items:center;gap:10px">
-                    <div style="background:#E35106;color:#fff;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:3px 5px;border-radius:2px">{type}</div>
-                    <span style="font-size:14px;color:#111">{name}</span>
+                    <div style="background:#E35106;color:#fff;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:3px 5px;border-radius:2px">{download.type || 'PDF'}</div>
+                    <span style="font-size:14px;color:#111">{download.name}</span>
                   </div>
                   <div style="display:flex;align-items:center;gap:12px">
-                    <span style="font-size:12px;color:#8A8A8A;font-family:'JetBrains Mono',monospace">{size}</span>
-                    <button class="btn btn-ghost btn-sm">Baixar</button>
+                    {download.url ? (
+                      <a href={download.url} target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Baixar</a>
+                    ) : (
+                      <button class="btn btn-ghost btn-sm" disabled style="opacity:.5;cursor:not-allowed">Baixar</button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -249,40 +253,3 @@ const garantia = product.specs.find(s => s.key === 'Garantia')?.value || '2 anos
 
   <Footer settings={settings} />
 </BaseLayout>
-
-<script define:vars={{ slug }} is:inline>
-  window.__BRA_SLUG__ = slug;
-</script>
-
-<script is:inline>
-  document.addEventListener('alpine:init', function () {
-    Alpine.data('compareBtn', function () {
-      return {
-        isCompared: false,
-        slug: '',
-
-        init: function () {
-          this.slug = window.__BRA_SLUG__ || '';
-          try {
-            var s = sessionStorage.getItem('bra-compare');
-            if (s) this.isCompared = JSON.parse(s).includes(this.slug);
-          } catch (e) {}
-        },
-
-        toggle: function () {
-          try {
-            var s    = sessionStorage.getItem('bra-compare');
-            var list = s ? JSON.parse(s) : [];
-            if (this.isCompared) {
-              list = list.filter(function (id) { return id !== this.slug; }.bind(this));
-            } else if (list.length < 4) {
-              list.push(this.slug);
-            }
-            sessionStorage.setItem('bra-compare', JSON.stringify(list));
-            this.isCompared = list.includes(this.slug);
-          } catch (e) {}
-        },
-      };
-    });
-  });
-</script>

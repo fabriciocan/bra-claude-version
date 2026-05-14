@@ -1,4 +1,4 @@
-import type { APIRoute } from 'astro';
+﻿import type { APIRoute } from 'astro';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -64,7 +64,7 @@ export const POST: APIRoute = async ({ request }) => {
       `;
 
       await transporter.sendMail({
-        from: `"BRALARMSEG Site" <${smtpUser}>`,
+        from: `"BRATECH Site" <${smtpUser}>`,
         to: contactEmail,
         replyTo: email || smtpUser,
         subject,

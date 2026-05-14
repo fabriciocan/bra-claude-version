@@ -10,6 +10,11 @@ const navLinks = [
   { href: '/produtos', label: 'Produtos', id: 'produtos' },
   { href: '/aplicacoes', label: 'Aplicações', id: 'aplicacoes' },
 ];
+
+const productLinks = [
+  { href: '/produtos?linha=emergencia', label: 'Emergência' },
+  { href: '/produtos?linha=led', label: 'LED' },
+];
 ---
 
 <!-- Topbar -->
@@ -41,21 +46,40 @@ const navLinks = [
 <!-- Main nav -->
 <nav class="site-nav" id="main-nav">
   <div class="container site-nav__inner">
-    <a href="/" class="site-nav__logo" aria-label="BRALARMSEG — Início">
+    <a href="/" class="site-nav__logo" aria-label="BRATECH — Início">
       <div class="site-nav__logo-word">
-        BR<span style="color: #E35106">A</span>LARMSEG
+        BR<span style="color: #E35106">A</span>TECH
       </div>
-      <div class="site-nav__logo-sub">Segurança e Emergência</div>
     </a>
 
     <div class="site-nav__links" id="nav-links">
       {navLinks.map(link => (
-        <a
-          href={link.href}
-          class={`site-nav__link${currentPage === link.id ? ' site-nav__link--active' : ''}`}
-        >
-          {link.label}
-        </a>
+        link.id === 'produtos' ? (
+          <div class="site-nav__dropdown">
+            <a
+              href={link.href}
+              class={`site-nav__link site-nav__link--dropdown${currentPage === link.id ? ' site-nav__link--active' : ''}`}
+              aria-haspopup="true"
+            >
+              {link.label}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="site-nav__dropdown-menu" aria-label="Linhas de produtos">
+              {productLinks.map(item => (
+                <a href={item.href} class="site-nav__dropdown-link">{item.label}</a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a
+            href={link.href}
+            class={`site-nav__link${currentPage === link.id ? ' site-nav__link--active' : ''}`}
+          >
+            {link.label}
+          </a>
+        )
       ))}
       <a href="/contato" class="site-nav__cta">Solicitar Orçamento</a>
     </div>
@@ -78,20 +102,35 @@ const navLinks = [
   <div class="mobile-menu__header">
     <a href="/" class="site-nav__logo" style="text-decoration:none">
       <div class="site-nav__logo-word" style="color:#fff">
-        BR<span style="color:#E35106">A</span>LARMSEG
+        BR<span style="color:#E35106">A</span>TECH
       </div>
-      <div class="site-nav__logo-sub">Segurança e Emergência</div>
     </a>
     <button class="mobile-menu__close" id="close-menu-btn" aria-label="Fechar menu">×</button>
   </div>
   <nav class="mobile-menu__links">
     {navLinks.map(link => (
-      <a
-        href={link.href}
-        class={`mobile-menu__link${currentPage === link.id ? ' mobile-menu__link--active' : ''}`}
-      >
-        {link.label}
-      </a>
+      link.id === 'produtos' ? (
+        <div class="mobile-menu__group">
+          <a
+            href={link.href}
+            class={`mobile-menu__link${currentPage === link.id ? ' mobile-menu__link--active' : ''}`}
+          >
+            {link.label}
+          </a>
+          <div class="mobile-menu__sub">
+            {productLinks.map(item => (
+              <a href={item.href} class="mobile-menu__sub-link">{item.label}</a>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <a
+          href={link.href}
+          class={`mobile-menu__link${currentPage === link.id ? ' mobile-menu__link--active' : ''}`}
+        >
+          {link.label}
+        </a>
+      )
     ))}
     <a href="/contato" class="mobile-menu__cta">Solicitar Orçamento</a>
   </nav>

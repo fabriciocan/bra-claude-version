@@ -9,7 +9,7 @@ interface Props {
 
 const {
   title,
-  description = 'BRALARMSEG — Especialistas em iluminação LED industrial. Highbay, projetores e luminárias de emergência para galpões, frigoríficos, centros logísticos e mais.',
+  description = 'BRATECH — Especialistas em iluminação LED industrial. Highbay, projetores e luminárias de emergência para galpões, frigoríficos, centros logísticos e mais.',
   ogImage = '/og-image.jpg',
 } = Astro.props;
 
@@ -21,21 +21,21 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} — BRALARMSEG</title>
+    <title>{title} — BRATECH</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={`${title} — BRALARMSEG`} />
+    <meta property="og:title" content={`${title} — BRATECH`} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="pt_BR" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} — BRALARMSEG`} />
+    <meta name="twitter:title" content={`${title} — BRATECH`} />
     <meta name="twitter:description" content={description} />
 
     <!-- Favicon -->

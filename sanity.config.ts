@@ -1,13 +1,13 @@
-import { defineConfig } from 'sanity';
+﻿import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './sanity/schemas';
 
 export default defineConfig({
   name: 'bralarmseg',
-  title: 'BRALARMSEG — CMS',
-  projectId: process.env.PUBLIC_SANITY_PROJECT_ID || '',
-  dataset: process.env.PUBLIC_SANITY_DATASET || 'production',
+  title: 'BRATECH — CMS',
+  projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID,
+  dataset: import.meta.env.SANITY_STUDIO_DATASET || 'production',
   plugins: [
     structureTool({
       structure: (S) =>
