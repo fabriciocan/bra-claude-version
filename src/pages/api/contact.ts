@@ -16,7 +16,7 @@ export const POST: APIRoute = async ({ request }) => {
     const smtpHost = import.meta.env.SMTP_HOST;
     const smtpUser = import.meta.env.SMTP_USER;
     const smtpPass = import.meta.env.SMTP_PASS;
-    const contactEmail = import.meta.env.CONTACT_EMAIL || 'bra@bralarmseg.com.br';
+    const contactEmail = import.meta.env.CONTACT_EMAIL || 'bra@bratekx.com.br';
 
     if (smtpHost && smtpUser && smtpPass) {
       // Dynamic import to avoid bundling nodemailer in client
@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
         <div style="font-family:Arial,sans-serif;max-width:600px">
           <div style="background:#0A1628;padding:20px;border-radius:4px 4px 0 0">
             <h1 style="color:#fff;font-size:22px;margin:0">
-              BRA<span style="color:#E35106">A</span>LARMSEG — Nova Solicitação
+              BRATEKX — Nova Solicitação
             </h1>
           </div>
           <div style="background:#F5F5F5;padding:24px;border-radius:0 0 4px 4px">
@@ -58,13 +58,13 @@ export const POST: APIRoute = async ({ request }) => {
             ${mensagem ? `<div style="margin-top:16px;padding:16px;background:#fff;border-radius:3px;border:1px solid #EBEBEB"><div style="font-size:12px;font-weight:bold;color:#5A5A5A;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px">Mensagem</div><p style="color:#3A3A3A;font-size:14px;line-height:1.6;margin:0">${mensagem.replace(/\n/g, '<br>')}</p></div>` : ''}
           </div>
           <p style="color:#8A8A8A;font-size:11px;text-align:center;margin-top:12px">
-            Enviado pelo site bralarmseg.com.br
+            Enviado pelo site bratekx.com.br
           </p>
         </div>
       `;
 
       await transporter.sendMail({
-        from: `"BRATECH Site" <${smtpUser}>`,
+        from: `"BRATEKX Site" <${smtpUser}>`,
         to: contactEmail,
         replyTo: email || smtpUser,
         subject,
