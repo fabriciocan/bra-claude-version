@@ -6,7 +6,7 @@ const { currentPage = '' } = Astro.props;
 
 const navLinks = [
   { href: '/', label: 'Início', id: 'home' },
-  { href: '/sobre', label: 'Sobre', id: 'sobre' },
+  { href: '/sobre', label: 'Atuação', id: 'sobre' },
   { href: '/produtos', label: 'Produtos', id: 'produtos' },
   { href: '/aplicacoes', label: 'Aplicações', id: 'aplicacoes' },
 ];
@@ -20,12 +20,12 @@ const productLinks = [
 <!-- Topbar -->
 <div class="topbar">
   <div class="container topbar__inner">
-    <span class="topbar__item">
+    <a href="https://wa.me/5541992656935" target="_blank" rel="noopener noreferrer" class="topbar__item topbar__item--link">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.64A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
       </svg>
-      (41) 99274-4818 | (41) 3045-9744
-    </span>
+      (41) 99265-6935 | (41) 3045-9744
+    </a>
     <span class="topbar__item">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -50,6 +50,7 @@ const productLinks = [
       <div class="site-nav__logo-word">
         BR<span style="color: #E35106">A</span>TEKX
       </div>
+      <div class="site-nav__logo-tagline">iluminação e tecnologia</div>
     </a>
 
     <div class="site-nav__links" id="nav-links">
@@ -81,6 +82,7 @@ const productLinks = [
           </a>
         )
       ))}
+      <a href="/produtos?simular=ia" class="site-nav__link site-nav__link--simular">Simular com IA</a>
       <a href="/contato" class="site-nav__cta">Solicitar Orçamento</a>
     </div>
 
@@ -104,6 +106,7 @@ const productLinks = [
       <div class="site-nav__logo-word" style="color:#fff">
         BR<span style="color:#E35106">A</span>TEKX
       </div>
+      <div class="site-nav__logo-tagline" style="color:#A0B4CC">iluminação e tecnologia</div>
     </a>
     <button class="mobile-menu__close" id="close-menu-btn" aria-label="Fechar menu">×</button>
   </div>
@@ -132,9 +135,46 @@ const productLinks = [
         </a>
       )
     ))}
+    <a href="/produtos?simular=ia" class="mobile-menu__link mobile-menu__link--simular">Simular com IA</a>
     <a href="/contato" class="mobile-menu__cta">Solicitar Orçamento</a>
   </nav>
 </div>
+
+<style>
+  .site-nav__logo-tagline {
+    font-family: 'Barlow', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #7A7A7A;
+    margin-top: 2px;
+    line-height: 1;
+  }
+  .site-nav__link--simular {
+    color: #E35106 !important;
+    font-weight: 700 !important;
+    border: 1px solid #E35106;
+    border-radius: 3px;
+    padding: 4px 10px !important;
+  }
+  .site-nav__link--simular:hover {
+    background: #E35106;
+    color: #fff !important;
+  }
+  .topbar__item--link {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.15s;
+  }
+  .topbar__item--link:hover {
+    color: #E35106;
+  }
+  .mobile-menu__link--simular {
+    color: #E35106 !important;
+    font-weight: 700 !important;
+  }
+</style>
 
 <script>
   // Scroll shadow

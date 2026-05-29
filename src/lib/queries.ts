@@ -448,7 +448,7 @@ const FALLBACK_SETTINGS: SiteSettings = {
   phone3: '(41) 4063-5272', phone4: '(11) 4063-5268',
   email: 'bra@bralarmseg.com.br',
   address: 'Rua Des. Antonio de Paula, 3586\nBoqueirão, Curitiba - PR, 81720-280',
-  cnpj: '09.251.362/0001-20', whatsapp: '5541992744818',
+  cnpj: '09.251.362/0001-20', whatsapp: '5541992656935',
 };
 
 // ——— Fetch helpers ———
